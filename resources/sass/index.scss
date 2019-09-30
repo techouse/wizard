@@ -1,0 +1,18 @@
+@tailwind base;
+
+@tailwind components;
+
+// Fonts
+@import "fonts";
+
+// Element UI
+$--font-path: '/fonts';
+@import "~element-ui/packages/theme-chalk/src/index";
+
+body {
+    @apply font-body;
+}
+
+@import "admin";
+
+@tailwind utilities;

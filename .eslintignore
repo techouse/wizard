@@ -1,0 +1,6 @@
+/webpack*.js
+/tailwind*.js
+/mixconfig*.js
+/.babelrc
+/public/js/*.js
+/public/vendor/nova/*.js

@@ -1,0 +1,15 @@
+#admin-container {
+  min-height: calc(100vh - 4rem);
+
+  .el-page-header {
+    &.no-back {
+      .el-page-header__left {
+        display: none !important;
+      }
+    }
+  }
+
+  .el-loading-spinner {
+    @apply flex items-center justify-center;
+  }
+}
