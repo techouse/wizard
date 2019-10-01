@@ -37,7 +37,7 @@ mix.js("resources/js/index.js", "public/js")
            }),
            new webpack.NormalModuleReplacementPlugin(
                /element-ui[\/\\]lib[\/\\]locale[\/\\]lang[\/\\]zh-CN/,
-               "element-ui/lib/locale/lang/sl"
+               "element-ui/lib/locale/lang/en" // change language to requested one
            ),
            ...(env === "production" ? [new TargetsPlugin({
                browsers: ["last 2 versions", "ie >= 11"],
