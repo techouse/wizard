@@ -3,6 +3,7 @@ import jwtDecode                                                                
 import router                                                                    from "../../router"
 import api                                                                       from "../../services/api"
 import apiConfig                                                                 from "../../api_client_config.json"
+import i18n                                                                      from "../../i18n"
 
 const state = {
     user_id: null,
@@ -147,7 +148,7 @@ const actions = {
             if (+new Date() >= expires || !access_token || !refresh_token || !user_id || !user_role) {
                 dispatch("logout")
 
-                reject(Error("Invalid access and refresh tokens!"))
+                reject(Error(i18n.t("Invalid access and refresh tokens!")))
             } else if (differenceInMinutes(expires, +new Date()) <= state.authRefreshThreshold + 1) {
                 api.post("oauth/token", {
                        grant_type: "refresh_token",

@@ -23,12 +23,12 @@
                     email: [
                         {
                             required: true,
-                            message: "Prosim vnesite e-poštni naslov",
+                            message: this.$t("Please enter email address"),
                             trigger: "blur",
                         },
                         {
                             type: "email",
-                            message: "Prosim vnesite veljaven e-poštni naslov",
+                            message: this.$t("Please enter a valid email address"),
                             trigger: "blur",
                         },
                     ],
@@ -38,7 +38,7 @@
                                 if (!value) {
                                     callback()
                                 } else if (value.length > 0 && value.length < 8) {
-                                    callback(new Error("Geslo je prekratko."))
+                                    callback(new Error(this.$t("Password is too short")))
                                 } else {
                                     if (this.user.password_confirmation !== "") {
                                         this.$refs[this.formRef].validateField("password_confirmation")
@@ -55,7 +55,7 @@
                                 if (!value) {
                                     callback()
                                 } else if (value !== this.user.password) {
-                                    callback(new Error("Gesli se ne ujemata!"))
+                                    callback(new Error(this.$t("The password confirmation does not match the password")))
                                 } else {
                                     callback()
                                 }
@@ -65,20 +65,23 @@
                     role: [
                         {
                             required: this.currentUserIsAdmin,
-                            message: "Prosim izberite vlogo",
+                            message: this.$t("Please select a role"),
                             trigger: "blur",
                         },
                     ],
                     name: [
                         {
                             required: true,
-                            message: "Prosim vnesite ime",
+                            message: this.$t("Please enter a name"),
                             trigger: "blur",
                         },
                         {
                             min: 3,
                             max: 255,
-                            message: "Dolžina naj bo med 3 in 255 znakov",
+                            message: this.$t("Length should be between {min} and {max} characters", {
+                                min: 3,
+                                max: 255,
+                            }),
                             trigger: "blur",
                         },
                     ],
@@ -121,36 +124,36 @@
                             .then(() => {
                                 this.$set(this.user, "password", null)
                                 this.$set(this.user, "password_confirmation", null)
-                                this.success("Uporabnik uspešno posodobljen!")
+                                this.success(this.$t("User successfully updated"))
                             })
                             .catch(() => {
-                                this.error(`Pri posodabljanju uporabnika je prišlo do napake: ${this.alert.message}`)
+                                this.error(this.$t("There was an error updating the user: {message}", { message: this.alert.message }))
                             })
                     } else {
-                        this.error("Podatki obrazca niso veljavni!")
+                        this.error(this.$t("The form data is invalid!"))
                         return false
                     }
                 })
             },
 
             remove() {
-                this.$confirm(`Ali ste prepričani, da hočete izbrisati ${this.user.name}?`, "Pozor", {
-                        confirmButtonText: "Da",
-                        cancelButtonText: "Ne",
+                this.$confirm(this.$t("Are you sure you want to delete {label}?", { label: this.user.name }), this.$t("Warning"), {
+                        confirmButtonText: this.$t("Yes"),
+                        cancelButtonText: this.$t("No"),
                         type: "warning",
                     })
                     .then(() => {
                         this.deleteUser(this.user.id)
                             .then(() => {
                                 this.$router.push({ name: "Users" })
-                                this.success("Uporabnik uspešno izbrisan!")
+                                this.success(this.$t("User successfully deleted"))
                             })
                             .catch(() => {
-                                this.error(`Pri brisanju uporabnika je prišlo do napake: ${this.alert.message}`)
+                                this.error(this.$t("There was an error deleting the user: {message}", { message: this.alert.message }))
                             })
                     })
                     .catch(() => {
-                        this.info("Uporabnik ni bil izbrisan!")
+                        this.info(this.$t("User not deleted"))
                     })
             },
         },

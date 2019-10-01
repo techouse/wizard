@@ -3,27 +3,27 @@
                :label-width="labelWidth"
     >
         <template v-slot:header>
-            <el-page-header title="Nazaj" :content="title" @back="goBack" />
+            <el-page-header :title="$t('Back')" :content="title" @back="goBack" />
             <div v-if="user.id" class="card-header-actions">
-                <el-button size="small" type="danger" :disabled="deleteButtonDisabled" @click="remove">
-                    <i class="fal fa-trash-alt" /> Izbriši uporabnika
+                <el-button :disabled="deleteButtonDisabled" @click="remove" size="small" type="danger">
+                    <i class="fal fa-trash-alt" /> {{ $t("Delete user") }}
                 </el-button>
             </div>
         </template>
         <template v-slot:body>
             <div class="flex flex-col flex-col-reverse lg:flex-row">
                 <div class="lg:w-1/2">
-                    <el-form-item label="E-pošta" prop="email">
+                    <el-form-item :label="$t('E-mail')" prop="email">
                         <el-input v-model="user.email" type="email" required />
                     </el-form-item>
-                    <el-form-item label="Geslo" prop="password">
-                        <el-input v-model="user.password" type="password" :required="!user.id" />
+                    <el-form-item :label="$t('Password')" prop="password">
+                        <el-input v-model="user.password" :required="!user.id" type="password" />
                     </el-form-item>
-                    <el-form-item label="Ponovi geslo" prop="password_confirmation">
-                        <el-input v-model="user.password_confirmation" type="password" :required="!user.id" />
+                    <el-form-item :label="$t('Repeat password')" prop="password_confirmation">
+                        <el-input v-model="user.password_confirmation" :required="!user.id" type="password" />
                     </el-form-item>
-                    <el-form-item v-if="currentUserIsAdmin" label="Vloga" prop="role">
-                        <el-select v-model="user.role" placeholder="Vloga uporabnika" required>
+                    <el-form-item v-if="currentUserIsAdmin" :label="$t('Role')" prop="role">
+                        <el-select v-model="user.role" :placeholder="$t('User role')" required>
                             <el-option v-for="role in roles"
                                        :key="role.id"
                                        :label="role.name"
@@ -33,15 +33,15 @@
                     </el-form-item>
                 </div>
                 <div class="lg:w-1/2">
-                    <el-form-item label="Ime" prop="name">
+                    <el-form-item :label="$t('Name')" prop="name">
                         <el-input v-model="user.name" type="text" required />
                     </el-form-item>
                 </div>
             </div>
         </template>
         <template v-slot:footer>
-            <el-button type="success" native-type="submit" @click="submit">
-                {{ user.id ? "Posodobi" : "Ustvari" }}
+            <el-button @click="submit" type="success" native-type="submit">
+                {{ user.id ? $t("Update") : $t("Create") }}
             </el-button>
         </template>
     </main-form>
@@ -64,38 +64,38 @@
                 roles: [
                     {
                         id: "administrator",
-                        name: "administrator",
+                        name: this.$t("administrator"),
                     },
                     {
                         id: "user",
-                        name: "uporabnik",
+                        name: this.$t("user"),
                     },
                 ],
                 rules: {
                     email: [
                         {
                             required: true,
-                            message: "Prosim vnesite e-poštni naslov",
+                            message: this.$t("Please enter email address"),
                             trigger: "blur",
                         },
                         {
                             type: "email",
-                            message: "Prosim vnesite veljaven e-poštni naslov",
+                            message: this.$t("Please enter a valid email address"),
                             trigger: "blur",
                         },
                     ],
                     password: [
                         {
                             required: true,
-                            message: "Vnesite geslo",
+                            message: this.$t("Please enter a password"),
                             trigger: "blur",
                         },
                         {
                             validator: (rule, value, callback) => {
                                 if (!value) {
-                                    callback(new Error("Prosim vnesite geslo"))
+                                    callback(new Error(this.$t("Please enter a password")))
                                 } else if (value.length > 0 && value.length < 8) {
-                                    callback(new Error("Geslo je prekratko"))
+                                    callback(new Error(this.$t("Password is too short")))
                                 } else {
                                     if (this.user.password_confirmation !== "") {
                                         this.$refs[this.formRef].validateField("password_confirmation")
@@ -109,15 +109,15 @@
                     password_confirmation: [
                         {
                             required: true,
-                            message: "Prosim ponovite geslo",
+                            message: this.$t("Please re-enter the password"),
                             trigger: "blur",
                         },
                         {
                             validator: (rule, value, callback) => {
                                 if (!value) {
-                                    callback(new Error("Prosim ponovite geslo"))
+                                    callback(new Error(this.$t("Please re-enter the password")))
                                 } else if (value !== this.user.password) {
-                                    callback(new Error("Gesli se ne ujemata"))
+                                    callback(new Error(this.$t("The password confirmation does not match the password")))
                                 } else {
                                     callback()
                                 }
@@ -127,20 +127,20 @@
                     role: [
                         {
                             required: this.currentUserIsAdmin,
-                            message: "Prosim izberite vlogo",
+                            message: this.$t("Please select a role"),
                             trigger: "blur",
                         },
                     ],
                     name: [
                         {
                             required: true,
-                            message: "Prosim vnesite ime",
+                            message: this.$t("Please enter a name"),
                             trigger: "blur",
                         },
                         {
                             min: 3,
                             max: 255,
-                            message: "Dolžina naj bo med 3 in 255 znakov",
+                            message: this.$t("Length should be between {min} and {max} characters", { min: 3, max: 255 }),
                             trigger: "blur",
                         },
                     ],
@@ -160,7 +160,7 @@
             },
 
             title() {
-                return "Nov uporabnik"
+                return this.$t("Create new user")
             },
         },
 
@@ -178,17 +178,17 @@
                     if (valid) {
                         this.createUser(this.user)
                             .then(({ data }) => {
-                                this.success("Uporabnik uspešno ustvarjen")
+                                this.success(this.$t("User successfully created"))
                                 this.$router.push({
                                     name: "EditUser",
                                     params: { userId: data.data.id },
                                 })
                             })
                             .catch(() => {
-                                this.error(`Pri ustvarjanju novega uporabnika je prišlo do napake: ${this.alert.message}`)
+                                this.error(this.$t("There was an error creating the user: {message}", { message: this.alert.message }))
                             })
                     } else {
-                        this.error("Podatki v obrazcu niso veljavni!")
+                        this.error(this.$t("The form data is invalid!"))
                         return false
                     }
                 })

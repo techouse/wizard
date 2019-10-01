@@ -26,3 +26,4 @@ _ide_helper_models.php
 .DS_Store
 mixconfig.js
 /resources/js/api_client_config.json
+/resources/js/i18n_config.json

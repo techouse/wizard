@@ -7,23 +7,23 @@
             <div class="sm:px-4">
                 <el-form ref="form" :model="form" :rules="rules" @submit.native.prevent>
                     <el-form-item prop="email">
-                        <el-input v-model="form.email" placeholder="E-pošta" type="email">
+                        <el-input v-model="form.email" :placeholder="$t('E-mail')" type="email">
                             <i slot="prepend" class="far fa-at" />
                         </el-input>
                     </el-form-item>
                     <el-form-item class="mt-2 sm:mt-4" prop="password">
-                        <el-input v-model="form.password" placeholder="Geslo" type="password">
+                        <el-input v-model="form.password" :placeholder="$t('Password')" type="password">
                             <i slot="prepend" class="fas fa-key" />
                         </el-input>
                     </el-form-item>
                     <el-form-item class="mt-2 sm:mt-4">
                         <el-checkbox v-model="form.remember" @change="rememberChanged">
-                            Zapomni si me
+                            {{ $t("Remember me") }}
                         </el-checkbox>
                     </el-form-item>
                     <el-form-item class="mt-2 sm:mt-4">
-                        <el-button type="primary" class="w-full" native-type="submit" @click="submit">
-                            Prijava
+                        <el-button @click="submit" type="primary" class="w-full" native-type="submit">
+                            {{ $t("Login") }}
                         </el-button>
                     </el-form-item>
                 </el-form>
@@ -51,25 +51,25 @@
                     email: [
                         {
                             required: true,
-                            message: "Prosim vnesite e-mail",
+                            message: this.$t("Please enter email"),
                             trigger: "blur",
                         },
                         {
                             type: "email",
-                            message: "Prosim vnesite veljaven e-mail",
+                            message: this.$t("Please enter valid e-mail"),
                             trigger: "blur",
                         },
                     ],
                     password: [
                         {
                             required: true,
-                            message: "Prosim vnesite geslo",
+                            message: this.$t("Please enter password"),
                             trigger: "blur",
                         },
                         {
                             min: 8,
                             max: 255,
-                            message: "Dolžina mora biti vsaj 8 znakov",
+                            message: this.$t("Minimal length is {min} characters", { min: 8 }),
                             trigger: "blur",
                         },
                     ],
@@ -120,22 +120,10 @@
                                     })
                             })
                             .catch((error) => {
-                                try {
-                                    const { response } = error
-                                    if (response.status === 403) {
-                                        this.$router.push({
-                                            name: "Unconfirmed",
-                                            params: { token: response.data.token },
-                                        })
-                                    } else if (response.status === 412) {
-                                        this.$set(this, "otpEnabled", true)
-                                    }
-                                } catch (e) {
-                                    console.log(error)
-                                }
+                                console.log(error)
                             })
                     } else {
-                        this.error("Prosim izpolnite prijavne podatke!")
+                        this.error(this.$t("Please fill out the login form!"))
                     }
                 })
             },

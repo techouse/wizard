@@ -7,11 +7,13 @@ module.exports = {
     extends: [
         "airbnb-base",
         "eslint:recommended",
-        "plugin:vue/recommended"
+        "plugin:vue/recommended",
+        "plugin:vue-i18n/recommended",
     ],
     globals: {
         "process": true,
-        "require": true
+        "require": true,
+        "$t": true,
     },
     env: {
         browser: true,
@@ -35,6 +37,9 @@ module.exports = {
             "node_modules",
             "\\.(coffee|scss|css|less|hbs|svg|json)$",
         ],
+        "vue-i18n": {
+            localeDir: "./resources/js/i18n/*.json"
+        }
     },
     rules: {
         "no-multi-spaces": 0,
@@ -66,7 +71,11 @@ module.exports = {
             vue: "never"
         }],
         "no-new": "off",
-        "no-underscore-dangle": ["error", { "allow": ["_remove", "_bulkRemove"] }]
+        "no-underscore-dangle": ["error", { "allow": ["_remove", "_bulkRemove"] }],
+        "vue-i18n/no-dynamic-keys": "error",
+        "vue-i18n/no-unused-keys": ["error", {
+            extensions: [".js", ".vue"]
+        }]
     },
     plugins: [
         "import",

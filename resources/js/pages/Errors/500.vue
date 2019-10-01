@@ -4,10 +4,10 @@
             <i class="fad fa-tombstone"/> 500
         </template>
         <template v-slot:title>
-            Ojej, problem ...
+            {{ $t("Houston, we have a problem!") }}
         </template>
         <template v-slot:content>
-            Spletna stran zaradi tehničnih težav trenutno ni na voljo. <i class="fal fa-dizzy"/>
+            {{ $t("The page you are looking for is temporarily unavailable.") }}
         </template>
     </error>
 </template>

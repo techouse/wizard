@@ -68,10 +68,10 @@
             ...mapActions("alert", ["error", "success", "info", "warning"]),
 
             getData() {
-                console.warn("Implement getData in a child component!")
+                console.warn(this.$t("Implement getData in a child component!"))
             },
 
-            updateData(image) {
+            updateData() {
                 this.$set(this, "loading", true)
 
                 this.getData()
@@ -115,20 +115,23 @@
             },
 
             bulkRemove() {
-                console.error("Not implemented. You must implement bulkRemove in the child component!")
+                console.error(this.$t("Not implemented. You must implement bulkRemove in the child component!"))
             },
 
             _bulkRemove(callback, singularLabel = "vnos", pluralLabel = null) {
                 if (typeof callback !== "function") {
-                    console.error("Invalid callback function provided!")
+                    console.error(this.$t("Invalid callback function provided!"))
                     return
                 }
                 const count = this.multipleSelection.length
-                const label = count > 1 ? pluralLabel || `${singularLabel}i` : singularLabel
+                const label = count > 1 ? pluralLabel || `${singularLabel}${this.$t("plural_suffix")}` : singularLabel
 
-                this.$confirm(`Ali ste prepričani, da želite izbrisati ${count} ${label}?`, "Pozor", {
-                        confirmButtonText: "Da",
-                        cancelButtonText: "Ne",
+                this.$confirm(this.$t("Are you sure you want to delete {count} {label}?", {
+                        count,
+                        label,
+                    }), this.$t("Warning"), {
+                        confirmButtonText: this.$t("Yes"),
+                        cancelButtonText: this.$t("No"),
                         type: "warning",
                     })
                     .then(() => {
@@ -136,50 +139,57 @@
                         callback(ids)
                             .then(() => {
                                 this.updateData()
-                                this.success(`${count} ${label} uspešno izbrisani`)
+                                this.success(this.$t("{count} {label} successfully deleted", { count, label }))
                                 this.$set(this, "multipleSelection", this.multipleSelection.filter((el) => !ids.includes(el.id)))
                             })
                             .catch(() => {
-                                this.error(`Prišlo je do napake pri brisanju ${count} ${label}: ${this.alert.message}`)
+                                this.error(this.$t("There was an error deleting the {count} {label}: {message}", {
+                                    count,
+                                    label,
+                                    message: this.alert.message,
+                                }))
                             })
                     })
                     .catch(() => {
-                        this.info(`${count} ${label} niso bili izbrisani.`)
+                        this.info(this.$t("{count} {label} were not deleted.", { count, label }))
                     })
             },
 
             remove(item = null) {
-                console.error("Not implemented. You must implement remove in the child component!")
+                console.error(this.$t("Not implemented. You must implement remove in the child component!"))
             },
 
             _remove(callback, model, label = "record") {
                 if (typeof callback !== "function") {
-                    console.error("Invalid callback function provided!")
+                    console.error(this.$t("Invalid callback function provided!"))
                     return
                 }
 
                 if (typeof model !== "object" || model.id === undefined) {
-                    console.error("Invalid model provided!")
+                    console.error(this.$t("Invalid model provided!"))
                     return
                 }
 
-                this.$confirm(`Ali ste prepričani, da želite izbrisati ${label}?`, "Pozor", {
-                        confirmButtonText: "Da",
-                        cancelButtonText: "Ne",
+                this.$confirm(this.$t("Are you sure you want to delete {label}?", { label }), this.$t("Warning"), {
+                        confirmButtonText: this.$t("Yes"),
+                        cancelButtonText: this.$t("No"),
                         type: "warning",
                     })
                     .then(() => {
                         callback(model.id)
                             .then(() => {
                                 this.updateData()
-                                this.success(`${label} uspešno izbrisan`)
+                                this.success(this.$t("{label} successfully deleted", { label }))
                             })
                             .catch(() => {
-                                this.error(`Prišlo je do napake pri brisanju ${label}: ${this.alert.message}`)
+                                this.error(this.$t("There was an error deleting the {label}: {message}", {
+                                    label,
+                                    message: this.alert.message,
+                                }))
                             })
                     })
                     .catch(() => {
-                        this.info(`${this.capitalize(label)} ni bil izbrisan`)
+                        this.info(this.$t("{label} not deleted", { label: this.capitalize(label) }))
                     })
             },
 

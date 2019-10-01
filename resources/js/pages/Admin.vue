@@ -2,8 +2,9 @@
     <div id="admin" class="min-h-screen w-full">
         <el-container direction="horizontal" class="bg-gray-800 text-white h-16 flex items-center justify-between">
             <div class="flex items-center justify-center h-full w-52">
-                <router-link class="h-10 w-10" :to="{name: 'Dashboard'}">
-                    <img src="/images/logo.svg" alt="Logo">
+                <router-link :to="{name: 'Dashboard'}" class="flex items-center justify-center">
+                    <img class="h-10 w-10" src="/images/logo.svg" alt="Logo">
+                    <span class="text-2xl font-bold ml-2">Wizard</span>
                 </router-link>
             </div>
             <el-header height="" class="flex items-center justify-end text-right text-sm h-full pl-0 pr-4">
@@ -15,10 +16,10 @@
                     </div>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item icon="fad fa-user-edit" :command="editMyself">
-                            Urejanje
+                            {{ $t("Edit") }}
                         </el-dropdown-item>
                         <el-dropdown-item icon="fad fa-sign-out-alt" :command="logout">
-                            Odjava
+                            {{ $t("Logout") }}
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -28,21 +29,21 @@
             <el-aside width="" class="w-52 bg-gray-300">
                 <el-menu :router="true" :default-active="$router.currentRoute.path">
                     <el-menu-item index="/dashboard">
-                        <i class="far fa-tachometer-alt-fast" /> Nadzorna plošča
+                        <i class="far fa-tachometer-alt-fast" /> {{ $t("Dashboard") }}
                     </el-menu-item>
                     <el-submenu v-if="currentUserIsAdmin" index="users">
                         <template slot="title">
-                            <i class="fad fa-users" /> Uporabniki
+                            <i class="fad fa-users" /> {{ $t("Users") }}
                         </template>
                         <el-menu-item-group>
                             <template slot="title">
-                                Urejanje uporabnikov
+                                {{ $t("Edit users") }}
                             </template>
                             <el-menu-item index="/users">
-                                <i class="fal fa-list" /> Seznam
+                                <i class="fal fa-list" /> {{ $t("List") }}
                             </el-menu-item>
                             <el-menu-item index="/users/new">
-                                <i class="fal fa-user-plus" /> Nov uporabnik
+                                <i class="fal fa-user-plus" /> {{ $t("Create new user") }}
                             </el-menu-item>
                         </el-menu-item-group>
                     </el-submenu>

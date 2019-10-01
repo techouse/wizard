@@ -3,6 +3,7 @@ import ElementUI from "element-ui"
 import api       from "./services/api"
 import router    from "./router"
 import store     from "./store"
+import i18n      from "./i18n"
 import App       from "./App"
 import "./filters"
 
@@ -23,5 +24,6 @@ new Vue({
     el: "#app",
     router,
     store,
+    i18n,
     render: (h) => h(App),
 })

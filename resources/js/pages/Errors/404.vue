@@ -4,10 +4,10 @@
             <i class="fad fa-map-signs"/> 404
         </template>
         <template v-slot:title>
-            Opala, ste se morda zgubili?
+            {{ $t("Oops! You're lost.") }}
         </template>
         <template v-slot:content>
-            Stran, ki jo iščete, žal ne obstaja. <i class="fal fa-frown"/>
+            {{ $t("The page you are looking for was not found.") }}
         </template>
     </error>
 </template>
