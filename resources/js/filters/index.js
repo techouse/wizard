@@ -1,10 +1,10 @@
-import Vue               from "vue"
-import { format, parse } from "date-fns"
+import Vue        from "vue"
+import { format } from "date-fns"
 
 Vue.filter("formatDate", (value, formatString = "YYYY-MM-DD HH:mm:ss") => format(new Date(value), formatString))
 
 Vue.filter("localeDateString", (value) => new Date(value)
-    .toLocaleDateString("sl-SI", {
+    .toLocaleDateString(navigator.language, {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
