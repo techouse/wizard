@@ -103,6 +103,11 @@
                             .then(({ data }) => {
                                 this.setCurrentUser(new User(data.data))
                             })
+                            .catch(({ response }) => {
+                                if (response.status === 401) {
+                                    this.logout()
+                                }
+                            })
                     })
                     .catch((error) => {
                         console.log(error)
