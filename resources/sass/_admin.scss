@@ -1,6 +1,12 @@
 #admin-container {
   min-height: calc(100vh - 4rem);
 
+  .main-menu {
+    &:not(.el-menu--collapse) {
+      @apply w-52;
+    }
+  }
+
   .el-page-header {
     &.no-back {
       .el-page-header__left {
