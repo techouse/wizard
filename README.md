@@ -18,7 +18,7 @@ In order to get Laravel Passport running you need to do a few steps:
 - run these commands
 ```bash
 php artisan passport:keys
-php artisan passport:client --passport
+php artisan passport:client --password
 ```
 
 - run this SQL query:
