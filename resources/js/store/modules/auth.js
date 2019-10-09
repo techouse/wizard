@@ -228,10 +228,13 @@ const actions = {
                        }
                    })
             },
-            Math.max(
-                differenceInMilliseconds(
-                    subMinutes(new Date(state.expires), state.authRefreshThreshold), new Date(),
-                ), 1000,
+            Math.min(
+                2 ** 31 - 1, // setTimeout uses a 32bit int to store the delay, so this is the absolute maximum
+                Math.max(
+                    differenceInMilliseconds(
+                        subMinutes(new Date(state.expires), state.authRefreshThreshold), new Date(),
+                    ), 1000,
+                ),
             ))
 
         commit("setAuthRefresher", refresher)
