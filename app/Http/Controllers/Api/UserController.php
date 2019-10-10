@@ -32,11 +32,11 @@ class UserController extends Controller
 
         return new UsersResource(
             User
-                ::when($request->input('name'), function ($query) use ($request) {
-                    $query->where('name', 'like', "%{$request->input('name')}%");
+                ::when($request->input('name'), function (Builder $query) use ($request) {
+                    $query->where('name', $request->input('name'));
                 })
-                ->when($request->input('email'), function ($query) use ($request) {
-                    $query->where('email', 'like', "%{$request->input('email')}%");
+                ->when($request->input('email'), function (Builder $query) use ($request) {
+                    $query->where('email', $request->input('email'));
                 })
                 ->when($request->input('search'), function ($query) use ($request) {
                     $query->where(function (Builder $query) use ($request) {

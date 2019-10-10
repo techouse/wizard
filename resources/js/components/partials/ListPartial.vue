@@ -1,4 +1,5 @@
 <script>
+    import { isEmpty }                from "lodash"
     import { mapActions, mapGetters } from "vuex"
     import MainContent                from "../MainContent"
 
@@ -69,6 +70,32 @@
 
             getData() {
                 console.warn(this.$t("Implement getData in a child component!"))
+            },
+
+            _getData(callback, list, Model) {
+                const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${
+                    Object.keys(this.params)
+                          .filter((k) => !!this.params[k])
+                          .map((k) => `${k}=${encodeURIComponent(this.params[k])}`)
+                          .join("&")
+                }`
+                window.history.pushState({ path: newUrl }, "", newUrl)
+
+                return new Promise((resolve, reject) => {
+                    callback({ params: this.params })
+                        .then(({ data }) => {
+                            this.$set(this, list, data.data.map((el) => new Model(el)))
+                            this.$set(this, "totalCount", data.meta.total)
+                            resolve()
+                        })
+                        .catch(({ response }) => {
+                            if (response.status === 403) {
+                                this.$router.push({ name: "Dashboard" })
+                            }
+
+                            reject(response)
+                        })
+                })
             },
 
             updateData() {
@@ -201,6 +228,18 @@
                 if (typeof s !== "string") return ""
                 return s.charAt(0)
                         .toUpperCase() + s.slice(1)
+            },
+
+            _beforeRouteUpdate(to, from, next, callback, list, Model) {
+                if (isEmpty(to.query)) {
+                    callback({ params: {} })
+                        .then(({ data }) => {
+                            this.$set(this, list, data.data.map((el) => new Model(el)))
+                            this.$set(this, "totalCount", data.meta.total)
+                        })
+                }
+
+                next()
             },
         },
     }

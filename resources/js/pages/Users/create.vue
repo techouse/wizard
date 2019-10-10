@@ -189,7 +189,6 @@
                             })
                     } else {
                         this.error(this.$t("The form data is invalid!"))
-                        return false
                     }
                 })
             },
