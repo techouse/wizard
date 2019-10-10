@@ -40,7 +40,7 @@
         "write-json-file": "^4.2.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^5.11.2",
+        "@fortawesome/fontawesome-free": "^5.11.2",
         "axios": "^0.18.1",
         "date-fns": "^2.4.1",
         "element-ui": "^2.12.0",

@@ -6,7 +6,7 @@
             <el-page-header :title="$t('Back')" :content="title" @back="goBack" />
             <div v-if="user.id" class="card-header-actions">
                 <el-button :disabled="deleteButtonDisabled" @click="remove" size="small" type="danger">
-                    <i class="fal fa-trash-alt" /> {{ $t("Delete user") }}
+                    <i class="far fa-trash-alt" /> {{ $t("Delete user") }}
                 </el-button>
             </div>
         </template>

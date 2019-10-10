@@ -17,10 +17,10 @@
                         <span v-if="currentUser">{{ currentUser.name || currentUser.email }}</span>
                     </div>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item :command="editMyself" icon="fad fa-user-edit">
+                        <el-dropdown-item :command="editMyself" icon="fas fa-user-edit">
                             {{ $t("Edit") }}
                         </el-dropdown-item>
-                        <el-dropdown-item :command="logout" icon="fad fa-sign-out-alt">
+                        <el-dropdown-item :command="logout" icon="fas fa-sign-out-alt">
                             {{ $t("Logout") }}
                         </el-dropdown-item>
                     </el-dropdown-menu>
@@ -33,12 +33,12 @@
                          class="main-menu"
                 >
                     <el-menu-item index="/dashboard">
-                        <i class="far fa-tachometer-alt-fast" />
+                        <i class="fas fa-tachometer-alt" />
                         <span slot="title">{{ $t("Dashboard") }}</span>
                     </el-menu-item>
                     <el-submenu v-if="currentUserIsAdmin" index="users">
                         <template slot="title">
-                            <i class="fad fa-users" />
+                            <i class="fas fa-users" />
                             <span slot="title">{{ $t("Users") }}</span>
                         </template>
                         <el-menu-item-group>
@@ -46,11 +46,11 @@
                                 {{ $t("Edit users") }}
                             </span>
                             <el-menu-item index="/users">
-                                <i class="fal fa-list" />
+                                <i class="fas fa-list" />
                                 <span slot="title">{{ $t("List") }}</span>
                             </el-menu-item>
                             <el-menu-item index="/users/new">
-                                <i class="fal fa-user-plus" />
+                                <i class="fas fa-user-plus" />
                                 <span slot="title">{{ $t("Create new user") }}</span>
                             </el-menu-item>
                         </el-menu-item-group>

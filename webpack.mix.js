@@ -21,7 +21,7 @@ try {
 mix.js("resources/js/index.js", "public/js")
    .sass("resources/sass/index.scss", "public/css")
    .copy("resources/images", "public/images")
-   .copy("node_modules/@fortawesome/fontawesome-pro/webfonts", "public/fonts")
+   .copy("node_modules/@fortawesome/fontawesome-free/webfonts", "public/fonts")
    .copy("node_modules/element-ui/lib/theme-chalk/fonts", "public/fonts")
 
    .webpackConfig({

@@ -8,16 +8,16 @@
                         {{ $t("Bulk actions") }} <i class="el-icon-arrow-down el-icon--right" />
                     </button>
                     <el-dropdown-menu slot="dropdown" size="mini">
-                        <el-dropdown-item :command="bulkRemove" icon="fal fa-trash-alt">
+                        <el-dropdown-item :command="bulkRemove" icon="far fa-trash-alt">
                             {{ $t("Delete selection") }}
                         </el-dropdown-item>
-                        <el-dropdown-item :command="toggleSelection" icon="fal fa-snowplow" divided>
+                        <el-dropdown-item :command="toggleSelection" icon="fas fa-snowplow" divided>
                             {{ $t("Clear selection") }}
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
                 <router-link :to="{name: 'CreateUser'}" class="el-button el-button--success el-button--small">
-                    <i class="far fa-user-plus" /> {{ $t("Create new user") }}
+                    <i class="fas fa-user-plus" /> {{ $t("Create new user") }}
                 </router-link>
             </div>
         </template>
@@ -58,14 +58,14 @@
                             <router-link :to="{name: 'EditUser', params: {userId: scope.row.id}}"
                                          class="el-button el-button--secondary el-button--small"
                             >
-                                <i class="far fa-user-edit" />
+                                <i class="fas fa-user-edit" />
                             </router-link>
                         </el-tooltip>
                         <el-tooltip class="item" effect="dark" :content="$t('Delete user')" placement="top-start">
                             <el-button :disabled="scope.row.id === user_id" @click="remove(scope.row)" size="small"
                                        type="danger"
                             >
-                                <i class="far fa-user-times" />
+                                <i class="fas fa-user-times" />
                             </el-button>
                         </el-tooltip>
                     </template>

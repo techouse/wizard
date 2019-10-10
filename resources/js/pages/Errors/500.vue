@@ -1,7 +1,7 @@
 <template>
     <error>
         <template v-slot:error_code>
-            <i class="fad fa-tombstone"/> 500
+            <i class="fas fa-dumpster-fire" /> 500
         </template>
         <template v-slot:title>
             {{ $t("Houston, we have a problem!") }}
