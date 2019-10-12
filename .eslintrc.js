@@ -71,7 +71,7 @@ module.exports = {
             vue: "never"
         }],
         "no-new": "off",
-        "no-underscore-dangle": ["error", { "allow": ["_remove", "_bulkRemove", "_getData", "_beforeRouteUpdate"] }],
+        "no-underscore-dangle": ["error", { "allow": ["_remove", "_bulkRemove", "_getData", "_beforeRouteUpdate", "_getModel"] }],
         "vue-i18n/no-dynamic-keys": "error",
         "vue-i18n/no-unused-keys": ["error", {
             extensions: [".js", ".vue"]

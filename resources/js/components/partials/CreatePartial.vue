@@ -1,35 +1,36 @@
 <script>
-    import { mapActions, mapGetters } from "vuex"
-    import MainForm                   from "../MainForm"
+    import MainForm   from "../MainForm"
+    import AlertMixin from "../../mixins/AlertMixin"
 
     export default {
         name: "CreatePartial",
 
         components: { MainForm },
 
+        mixins: [AlertMixin],
+
         data() {
             return {
                 labelWidth: "140px",
                 formRef: "create-form",
+                model: {},
                 rules: {},
                 loading: false,
             }
         },
 
         computed: {
-            ...mapGetters("alert", ["alert"]),
-
             title() {
                 return "Create"
             },
         },
 
         methods: {
-            ...mapActions("alert", ["error", "success", "info", "warning"]),
+            submit() {
+            },
 
-            submit() {},
-
-            remove() {},
+            remove() {
+            },
 
             goBack() {
                 this.$router.go(-1)

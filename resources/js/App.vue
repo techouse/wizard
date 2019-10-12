@@ -1,5 +1,5 @@
 <template>
-    <main id="app" role="main" class="flex min-h-screen bg-gray-100 mx-auto relative" :class="classes">
+    <main id="app" :class="classes" role="main" class="flex min-h-screen bg-gray-100 mx-auto relative">
         <auth v-if="isAuthPage" />
         <admin v-else-if="isAdministrationPage" />
         <error v-else-if="isErrorPage" />

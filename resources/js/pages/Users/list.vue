@@ -22,7 +22,7 @@
             </div>
         </template>
         <template v-slot:body>
-            <el-table :ref="tableRef" v-loading="loading" :data="users" @sort-change="orderBy"
+            <el-table :ref="tableRef" v-loading="loading" :data="models" @sort-change="orderBy"
                       @selection-change="handleSelectionChange"
                       class="w-full"
             >
@@ -55,13 +55,13 @@
                     </template>
                     <template slot-scope="scope">
                         <el-tooltip :content="$t('Edit user')" class="item" effect="dark" placement="top-start">
-                            <router-link :to="{name: 'EditUser', params: {userId: scope.row.id}}"
+                            <router-link :to="{name: 'EditUser', params: {modelId: scope.row.id}}"
                                          class="el-button el-button--secondary el-button--small"
                             >
                                 <i class="fas fa-user-edit" />
                             </router-link>
                         </el-tooltip>
-                        <el-tooltip class="item" effect="dark" :content="$t('Delete user')" placement="top-start">
+                        <el-tooltip :content="$t('Delete user')" class="item" effect="dark" placement="top-start">
                             <el-button :disabled="scope.row.id === user_id" @click="remove(scope.row)" size="small"
                                        type="danger"
                             >
@@ -99,7 +99,6 @@
         data() {
             return {
                 title: this.$t("Users"),
-                users: [],
             }
         },
 
@@ -113,20 +112,20 @@
             ...mapActions("user", ["getUsers", "deleteUser", "deleteUsers"]),
 
             getData() {
-                return this._getData(this.getUsers, "users", User)
+                return this._getData(this.getUsers, User)
             },
 
             bulkRemove() {
                 this._bulkRemove(this.deleteUsers, this.$t("user"))
             },
 
-            remove(user) {
-                this._remove(this.deleteUser, user, user.name)
+            remove(model) {
+                this._remove(this.deleteUser, model, user.name)
             },
         },
 
         beforeRouteUpdate(to, from, next) {
-            this._beforeRouteUpdate(to, from, next, this.getUsers, "users", User)
+            this._beforeRouteUpdate(to, from, next, this.getUsers, User)
         },
     }
 </script>

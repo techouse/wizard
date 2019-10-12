@@ -2,7 +2,6 @@ import { addSeconds, differenceInMilliseconds, differenceInMinutes, subMinutes }
 import jwtDecode                                                                 from "jwt-decode"
 import router                                                                    from "../../router"
 import api                                                                       from "../../services/api"
-import apiConfig                                                                 from "../../api_client_config.json"
 import i18n                                                                      from "../../i18n"
 
 const state = {
@@ -100,8 +99,8 @@ const actions = {
         return new Promise((resolve, reject) => {
             api.post("oauth/token", {
                    grant_type: "password",
-                   client_id: apiConfig.client_id,
-                   client_secret: apiConfig.client_secret,
+                   client_id: process.env.MIX_API_CLIENT_ID,
+                   client_secret: process.env.MIX_API_CLIENT_SECRET,
                    username: email,
                    password,
                    scope: "*",
@@ -153,8 +152,8 @@ const actions = {
                 api.post("oauth/token", {
                        grant_type: "refresh_token",
                        refresh_token,
-                       client_id: apiConfig.client_id,
-                       client_secret: apiConfig.client_secret,
+                       client_id: process.env.MIX_API_CLIENT_ID,
+                       client_secret: process.env.MIX_API_CLIENT_SECRET,
                        scope: "*",
                    })
                    .then(({ headers, data }) => {
@@ -203,8 +202,8 @@ const actions = {
                 api.post("oauth/token", {
                        grant_type: "refresh_token",
                        refresh_token: state.refresh_token,
-                       client_id: apiConfig.client_id,
-                       client_secret: apiConfig.client_secret,
+                       client_id: process.env.MIX_API_CLIENT_ID,
+                       client_secret: process.env.MIX_API_CLIENT_SECRET,
                        scope: "*",
                    })
                    .then(({ headers, data }) => {

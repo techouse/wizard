@@ -1,10 +1,10 @@
 <template>
-    <main-form :ref="formRef" :form-ref="formRef" :loading="loading" :model="user" :rules="rules"
+    <main-form :ref="formRef" :form-ref="formRef" :loading="loading" :model="model" :rules="rules"
                :label-width="labelWidth"
     >
         <template v-slot:header>
             <el-page-header :title="$t('Back')" :content="title" @back="goBack" />
-            <div v-if="user.id" class="card-header-actions">
+            <div v-if="model.id" class="card-header-actions">
                 <el-button :disabled="deleteButtonDisabled" @click="remove" size="small" type="danger">
                     <i class="far fa-trash-alt" /> {{ $t("Delete user") }}
                 </el-button>
@@ -14,16 +14,16 @@
             <div class="flex flex-col flex-col-reverse lg:flex-row">
                 <div class="lg:w-1/2">
                     <el-form-item :label="$t('E-mail')" prop="email">
-                        <el-input v-model="user.email" type="email" required />
+                        <el-input v-model="model.email" type="email" required />
                     </el-form-item>
                     <el-form-item :label="$t('Password')" prop="password">
-                        <el-input v-model="user.password" :required="!user.id" type="password" />
+                        <el-input v-model="model.password" :required="!model.id" type="password" />
                     </el-form-item>
                     <el-form-item :label="$t('Repeat password')" prop="password_confirmation">
-                        <el-input v-model="user.password_confirmation" :required="!user.id" type="password" />
+                        <el-input v-model="model.password_confirmation" :required="!model.id" type="password" />
                     </el-form-item>
                     <el-form-item v-if="currentUserIsAdmin" :label="$t('Role')" prop="role">
-                        <el-select v-model="user.role" :placeholder="$t('User role')" required>
+                        <el-select v-model="model.role" :placeholder="$t('User role')" required>
                             <el-option v-for="role in roles"
                                        :key="role.id"
                                        :label="role.name"
@@ -34,14 +34,14 @@
                 </div>
                 <div class="lg:w-1/2">
                     <el-form-item :label="$t('Name')" prop="name">
-                        <el-input v-model="user.name" type="text" required />
+                        <el-input v-model="model.name" type="text" required />
                     </el-form-item>
                 </div>
             </div>
         </template>
         <template v-slot:footer>
             <el-button @click="submit" type="success" native-type="submit">
-                {{ user.id ? $t("Update") : $t("Create") }}
+                {{ model.id ? $t("Update") : $t("Create") }}
             </el-button>
         </template>
     </main-form>
@@ -60,7 +60,7 @@
         data() {
             return {
                 formRef: "create-user-form",
-                user: new User(),
+                model: new User(),
                 roles: [
                     {
                         id: "administrator",
@@ -97,7 +97,7 @@
                                 } else if (value.length > 0 && value.length < 8) {
                                     callback(new Error(this.$t("Password is too short")))
                                 } else {
-                                    if (this.user.password_confirmation !== "") {
+                                    if (this.model.password_confirmation !== "") {
                                         this.$refs[this.formRef].validateField("password_confirmation")
                                     }
                                     callback()
@@ -116,7 +116,7 @@
                             validator: (rule, value, callback) => {
                                 if (!value) {
                                     callback(new Error(this.$t("Please re-enter the password")))
-                                } else if (value !== this.user.password) {
+                                } else if (value !== this.model.password) {
                                     callback(new Error(this.$t("The password confirmation does not match the password")))
                                 } else {
                                     callback()
@@ -153,7 +153,7 @@
 
             deleteButtonDisabled() {
                 if (this.currentUser && "id" in this.currentUser) {
-                    return this.user.id === this.currentUser.id
+                    return this.model.id === this.currentUser.id
                 }
 
                 return false
@@ -165,8 +165,8 @@
         },
 
         mounted() {
-            if (!this.user.role) {
-                this.$set(this.user, "role", "user")
+            if (!this.model.role) {
+                this.$set(this.model, "role", "user")
             }
         },
 
@@ -176,12 +176,12 @@
             submit() {
                 this.$refs[this.formRef].validate((valid) => {
                     if (valid) {
-                        this.createUser(this.user)
+                        this.createUser(this.model)
                             .then(({ data }) => {
                                 this.success(this.$t("User successfully created"))
                                 this.$router.push({
                                     name: "EditUser",
-                                    params: { userId: data.data.id },
+                                    params: { modelId: data.data.id },
                                 })
                             })
                             .catch(() => {

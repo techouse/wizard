@@ -1,7 +1,7 @@
 <script>
-    import { isEmpty }                from "lodash"
-    import { mapActions, mapGetters } from "vuex"
-    import MainContent                from "../MainContent"
+    import { isEmpty } from "lodash"
+    import MainContent from "../MainContent"
+    import AlertMixin  from "../../mixins/AlertMixin"
 
     export default {
         name: "ListPartial",
@@ -9,6 +9,8 @@
         components: {
             MainContent,
         },
+
+        mixins: [AlertMixin],
 
         props: {
             search: {
@@ -36,6 +38,7 @@
         data() {
             return {
                 tableRef: "listTable",
+                models: [],
                 loading: false,
                 multipleSelection: [],
                 params: {
@@ -47,10 +50,6 @@
                 pageSizes: [12, 24, 48, 96],
                 totalCount: 0,
             }
-        },
-
-        computed: {
-            ...mapGetters("alert", ["alert"]),
         },
 
         created() {
@@ -66,13 +65,11 @@
         },
 
         methods: {
-            ...mapActions("alert", ["error", "success", "info", "warning"]),
-
             getData() {
                 console.warn(this.$t("Implement getData in a child component!"))
             },
 
-            _getData(callback, list, Model) {
+            _getData(callback, Model) {
                 const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${
                     Object.keys(this.params)
                           .filter((k) => !!this.params[k])
@@ -84,7 +81,7 @@
                 return new Promise((resolve, reject) => {
                     callback({ params: this.params })
                         .then(({ data }) => {
-                            this.$set(this, list, data.data.map((el) => new Model(el)))
+                            this.$set(this, "models", data.data.map((el) => new Model(el)))
                             this.$set(this, "totalCount", data.meta.total)
                             resolve()
                         })
@@ -230,11 +227,11 @@
                         .toUpperCase() + s.slice(1)
             },
 
-            _beforeRouteUpdate(to, from, next, callback, list, Model) {
+            _beforeRouteUpdate(to, from, next, callback, Model) {
                 if (isEmpty(to.query)) {
                     callback({ params: {} })
                         .then(({ data }) => {
-                            this.$set(this, list, data.data.map((el) => new Model(el)))
+                            this.$set(this, "models", data.data.map((el) => new Model(el)))
                             this.$set(this, "totalCount", data.meta.total)
                         })
                 }

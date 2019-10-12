@@ -1,6 +1,5 @@
 import Vue     from "vue"
 import VueI18n from "vue-i18n"
-import config  from "../i18n_config.json"
 
 Vue.use(VueI18n)
 
@@ -19,6 +18,7 @@ function loadLocaleMessages() {
 }
 
 export default new VueI18n({
-    ...config,
+    locale: process.env.MIX_VUE_APP_I18N_LOCALE,
+    fallbackLocale: process.env.MIX_VUE_APP_I18N_FALLBACK_LOCALE,
     messages: loadLocaleMessages(),
 })

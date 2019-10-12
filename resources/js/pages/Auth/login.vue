@@ -8,7 +8,7 @@
                 <el-form ref="form" :model="form" :rules="rules" @submit.native.prevent>
                     <el-form-item prop="email">
                         <el-input v-model="form.email" :placeholder="$t('E-mail')" type="email">
-                            <i slot="prepend" class="far fa-at" />
+                            <i slot="prepend" class="fas fa-at" />
                         </el-input>
                     </el-form-item>
                     <el-form-item class="mt-2 sm:mt-4" prop="password">

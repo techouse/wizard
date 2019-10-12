@@ -1,7 +1,7 @@
 <template>
     <error>
         <template v-slot:error_code>
-            <i class="fas fa-map-signs"/> 404
+            <i class="fas fa-map-signs" /> 404
         </template>
         <template v-slot:title>
             {{ $t("Oops! You're lost.") }}

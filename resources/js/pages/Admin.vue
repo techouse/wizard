@@ -123,7 +123,7 @@
             editMyself() {
                 this.$router.push({
                     name: "EditUser",
-                    params: { userId: Number(this.currentUser.id) },
+                    params: { modelId: Number(this.currentUser.id) },
                 })
             },
 

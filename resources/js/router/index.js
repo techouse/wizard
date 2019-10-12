@@ -71,7 +71,7 @@ const routerOptions = [
                 },
             },
             {
-                path: ":userId(\\d+)/",
+                path: ":modelId(\\d+)/",
                 component: EditUser,
                 props: true,
                 name: "EditUser",
@@ -127,7 +127,7 @@ router.beforeEach((to, from, next) => {
             store.commit("auth/clearAuthData")
             next({ name: "Login" })
         } else if (to.matched.some((record) => record.meta.requiresMyselfOrAdmin)) {
-            if (("userId" in to.params && to.params.userId === user_id) || user_role === "administrator") {
+            if (("modelId" in to.params && to.params.modelId === user_id) || user_role === "administrator") {
                 next()
             } else {
                 next({ name: "Dashboard" })
