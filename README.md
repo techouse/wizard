@@ -48,5 +48,20 @@ API_CLIENT_SECRET=
 
 - only **AFTER** you have done the 3 steps above you can run:
 ```bash
-npm run prod
+npm run dev
 ```
+
+## CRUD Wizard
+
+In order to speed up your workflow I wrote a small CRUD wizard.
+
+Say you want to create a CRUD endpoint for the model named `Animal`
+
+```bash
+php artisan make:migration create_animals_table --create=animals
+php artisan wizard:crud Animal
+```
+
+The wizard will create a `Model`, `Controller`, `Resource`, and `Policy`.
+The only thing you have to do then is register the policy in `app/Providers/AuthServiceProvider.php`.
+Also take a look at `routes/api.php` and move the generated ApiResource line to the correct place.

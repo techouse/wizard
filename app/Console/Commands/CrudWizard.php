@@ -48,7 +48,10 @@ class CrudWizard extends Command
         $this->policy($name);
         $this->controller($name);
 
-        File::append(base_path('routes/api.php'), 'Route::apiResource(\'' . Str::kebab(Str::plural($name)) . "', '{$name}Controller');");
+        File::append(
+            base_path('routes/api.php'),
+            'Route::apiResource(\'' . Str::kebab(Str::plural($name)) . "', '{$name}Controller'); // TODO put this line in the right place"
+        );
     }
 
     protected function getStub($type)
