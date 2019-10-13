@@ -1,5 +1,11 @@
 <div align="center">
-    <img width="200" height="200" src="resources/images/logo.svg">
+    <img width="150" height="150" src="resources/images/laravel.svg">
+    <strong style="font-size: 90px">+</strong>
+    <img width="150" height="150" src="resources/images/vuejs.svg">
+    <strong style="font-size: 90px">+</strong>
+    <img width="150" height="150" src="resources/images/elementui.svg">
+    <strong style="font-size: 90px">=</strong>
+    <img width="150" height="150" src="resources/images/logo.svg">
 </div>
 
 # Wizard
