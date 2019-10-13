@@ -40,7 +40,7 @@ class CrudWizard extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $name = ucfirst(Str::camel($this->argument('name')));
 
         $this->model($name);
         $this->resource($name);
