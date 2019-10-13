@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Policies;
+
+use App\{{modelName}};
+use App\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class {{modelName}}Policy
+{
+    use HandlesAuthorization;
+    use AdministratorCanDoEverything;
+
+    /**
+     * Determine whether the user can view any regions.
+     *
+     * @param  \App\User $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can view the region.
+     *
+     * @param  \App\User $user
+     * @param  \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return mixed
+     */
+    public function view(User $user, {{modelName}} ${{modelNameSingularCamelCase}})
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can create regions.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can update the region.
+     *
+     * @param  \App\User $user
+     * @param  \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return mixed
+     */
+    public function update(User $user, {{modelName}} ${{modelNameSingularCamelCase}})
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can delete the region.
+     *
+     * @param  \App\User $user
+     * @param  \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return mixed
+     */
+    public function delete(User $user, {{modelName}} ${{modelNameSingularCamelCase}})
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function deleteMany(User $user)
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can restore the region.
+     *
+     * @param  \App\User $user
+     * @param  \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return mixed
+     */
+    public function restore(User $user, {{modelName}} ${{modelNameSingularCamelCase}})
+    {
+        return true; // TODO amend permission
+    }
+
+    /**
+     * Determine whether the user can permanently delete the region.
+     *
+     * @param  \App\User $user
+     * @param  \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return mixed
+     */
+    public function forceDelete(User $user, {{modelName}} ${{modelNameSingularCamelCase}})
+    {
+        return true; // TODO amend permission
+    }
+}

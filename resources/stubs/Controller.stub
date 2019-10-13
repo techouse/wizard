@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\BasicPagination;
+use App\Http\Resources\{{modelName}}Resource;
+use App\Http\Resources\{{modelNamePluralPascalCase}}Resource;
+use App\{{modelName}};
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+
+class {{modelName}}Controller extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \App\Http\Requests\BasicPagination $request
+     * @return \App\Http\Resources\{{modelNamePluralPascalCase}}Resource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function index(BasicPagination $request): {{modelNamePluralPascalCase}}Resource
+    {
+        $this->authorize('viewAny', {{modelName}}::class);
+
+        // TODO request validation
+
+        return new {{modelNamePluralPascalCase}}Resource(
+            {{modelName}}
+                ::when($request->input('sort'),
+                    function (Builder $query) use ($request) {
+                        $query->orderBy(...explode('|', $request->input('sort', 'id|asc')));
+                    },
+                    function (Builder $query) {
+                        $query->orderBy('id', 'asc');
+                    })
+                ->when($request->input('no_paginate'),
+                        function (Builder $query) {
+                            return $query->get();
+                        },
+                        function (Builder $query) use ($request) {
+                            return $query->paginate($request->input('per_page', Controller::DEFAULT_ITEMS_PER_PAGE))
+                                         ->appends(['sort'     => $request->input('sort', Controller::DEFAULT_SORT),
+                                                    'per_page' => $request->input('per_page', Controller::DEFAULT_ITEMS_PER_PAGE)]);
+                        })
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \App\Http\Resources\{{modelName}}Resource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function store(Request $request): {{modelName}}Resource
+    {
+        $this->authorize('create', {{modelName}}::class);
+
+        $data = $request->validate(
+            // TODO request validation
+        );
+
+        new {{modelName}}Resource({{modelName}}::create($data));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return \App\Http\Resources\{{modelName}}Resource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function show({{modelName}} ${{modelNameSingularCamelCase}}): {{modelName}}Resource
+    {
+        $this->authorize('view', ${{modelNameSingularCamelCase}});
+
+        return new {{modelName}}Resource(${{modelNameSingularCamelCase}});
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\{{modelName}} ${{modelNameSingularCamelCase}}
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(Request $request, {{modelName}} ${{modelNameSingularCamelCase}}): Response
+    {
+        $this->authorize('update', ${{modelNameSingularCamelCase}});
+
+        $data = $request->validate(
+            // TODO request validation
+        );
+
+        ${{modelNameSingularCamelCase}}->update($data);
+
+        return response(['message' => 'OK'], 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \App\{{modelName}} $region
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy({{modelName}} ${{modelNameSingularCamelCase}}): Response
+    {
+        $this->authorize('delete', ${{modelNameSingularCamelCase}});
+
+        ${{modelNameSingularCamelCase}}->delete();
+
+        return response()->noContent();
+    }
+
+    /**
+     * Remove multiple resources from storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function bulkDestroy(Request $request): Response
+    {
+        $this->authorize('deleteMany', {{modelName}}::class);
+
+        $request->validate(['ids'   => ['required', 'bail', 'array', 'min:1'],
+                            'ids.*' => ['required', 'numeric', 'min:1', 'exists:{{modelNamePluralSnakeCase}},id']]);
+
+        {{modelName}}::whereIn('id', $request->input('ids'))->delete();
+
+        return response()->noContent();
+    }
+}

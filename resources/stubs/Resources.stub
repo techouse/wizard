@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+class {{modelNamePluralPascalCase}}Resource extends ResourceCollection
+{
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return ['data' => {{modelName}}Resource::collection($this->collection)];
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
+     */
+    public function with($request)
+    {
+        if ($request->input('sort')) {
+            $sort = explode('|', $request->input('sort'));
+        } else {
+            $sort = ['id', 'asc'];
+        }
+
+        return [
+            'links' => ['self' => route('api.{{modelNamePluralKebabCase}}.index')],
+            'meta'  => ['sort' => ['by'        => $sort[0],
+                                   'direction' => $sort[1]]],
+        ];
+    }
+}
