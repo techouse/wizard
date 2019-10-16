@@ -1,106 +1,20 @@
-import Vue    from "vue"
-import Router from "vue-router"
-import store  from "../store"
-
-/**
- * PAGES
- */
-// Auth
-const Auth = () => import(/* webpackChunkName: "auth" */ "../pages/Auth")
-const Login = () => import(/* webpackChunkName: "auth-login" */ "../pages/Auth/login.vue")
-// Dashboard
-const Dashboard = () => import(/* webpackChunkName: "dashboard" */ "../pages/Dashboard")
-// Users
-const Users = () => import(/* webpackChunkName: "users" */ "../pages/Users")
-const ListUsers = () => import(/* webpackChunkName: "users-list" */ "../pages/Users/list")
-const CreateUser = () => import(/* webpackChunkName: "users-create" */ "../pages/Users/create")
-const EditUser = () => import(/* webpackChunkName: "users-edit" */ "../pages/Users/edit")
-// Errors
-const Error404 = () => import(/* webpackChunkName: "errors-404" */ "../pages/Errors/404")
+import Vue       from "vue"
+import Router    from "vue-router"
+import store     from "../store"
+import auth      from "./routes/auth"
+import dashboard from "./routes/dashboard"
+import users     from "./routes/users"
+import error404  from "./routes/error404"
 
 const routerOptions = [
     {
         path: "/",
         redirect: { name: "Dashboard" },
     },
-    {
-        path: "/auth/",
-        component: Auth,
-        children: [
-            {
-                path: "login/",
-                component: Login,
-                name: "Login",
-                meta: {
-                    auth: true,
-                    guest: true,
-                },
-            },
-        ],
-    },
-    {
-        path: "/dashboard/",
-        component: Dashboard,
-        name: "Dashboard",
-        meta: {
-            requiresAuth: true,
-            breadcrumb: "Dashboard",
-        },
-    },
-    {
-        path: "/users/",
-        component: Users,
-        meta: {
-            requiresAuth: true,
-            breadcrumb: "Users",
-        },
-        children: [
-            {
-                path: "",
-                component: ListUsers,
-                name: "Users",
-                props: (route) => ({
-                    search: route.query.search,
-                    page: Number(route.query.page) || 1,
-                    perPage: Number(route.query.per_page) || 12,
-                    sort: route.query.sort,
-                }),
-                meta: {
-                    requiresAuth: true,
-                    requiresAdmin: true,
-                },
-            },
-            {
-                path: ":modelId(\\d+)/",
-                component: EditUser,
-                props: true,
-                name: "EditUser",
-                meta: {
-                    requiresAuth: true,
-                    requiresMyselfOrAdmin: true,
-                    breadcrumb: "Edit",
-                },
-            },
-            {
-                path: "new/",
-                component: CreateUser,
-                name: "CreateUser",
-                meta: {
-                    requiresAuth: true,
-                    requiresAdmin: true,
-                    breadcrumb: "Create",
-                },
-            },
-        ],
-    },
-    {
-        path: "*",
-        component: Error404,
-        name: "Error404",
-        meta: {
-            error: true,
-        },
-    },
+    auth,
+    dashboard,
+    users,
+    error404,
 ]
 
 Vue.use(Router)
