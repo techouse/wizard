@@ -120,7 +120,7 @@
             },
 
             remove(model) {
-                this._remove(this.deleteUser, model, user.name)
+                this._remove(this.deleteUser, model, model.name)
             },
         },
 
