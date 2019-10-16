@@ -67,8 +67,11 @@
 
         methods: {
             handleWindowResize() {
-                this.$set(this, "width", document.getElementById(this.id).clientWidth)
-                this.$set(this, "height", document.getElementById(this.id).clientHeight)
+                const element = document.getElementById(this.id)
+                if (element) {
+                    this.$set(this, "width", element.clientWidth)
+                    this.$set(this, "height", element.clientHeight)
+                }
             },
 
             validate(callback) {
