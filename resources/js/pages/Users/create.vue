@@ -3,7 +3,11 @@
                :label-width="labelWidth"
     >
         <template v-slot:header>
-            <el-page-header :title="$t('Back')" :content="title" @back="goBack" />
+            <el-page-header :title="$t('Back')" @back="goBack">
+                <template slot="content">
+                    <i class="fas fa-user" /> {{ title }}
+                </template>
+            </el-page-header>
             <div v-if="model.id" class="card-header-actions">
                 <el-button :disabled="deleteButtonDisabled" @click="remove" size="small" type="danger">
                     <i class="far fa-trash-alt" /> {{ $t("Delete user") }}

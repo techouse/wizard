@@ -1,7 +1,11 @@
 <template>
     <main-content>
         <template v-slot:header>
-            <el-page-header :content="title" class="no-back" />
+            <el-page-header class="no-back">
+                <template slot="content">
+                    <i class="fas fa-users" /> {{ title }}
+                </template>
+            </el-page-header>
             <div class="inline-block">
                 <el-dropdown v-if="multipleSelection.length" @command="handleBulkCommand">
                     <button class="el-button el-button--secondary el-button--small">
