@@ -1,8 +1,8 @@
 <script>
-    import { mapActions, mapGetters } from "vuex"
-    import CreateUser                 from "./create"
-    import EditMixin                  from "../../mixins/EditMixin"
-    import User                       from "../../models/User"
+    import { mapActions } from "vuex"
+    import CreateUser     from "./create"
+    import EditMixin      from "../../mixins/EditMixin"
+    import User           from "../../models/User"
 
     export default {
         name: "EditUser",
@@ -83,14 +83,6 @@
                     ],
                 },
             }
-        },
-
-        computed: {
-            ...mapGetters("auth", {
-                currentUserIsAdmin: "isAdministrator",
-            }),
-
-            ...mapGetters("user", ["currentUser"]),
         },
 
         created() {

@@ -1,6 +1,6 @@
 <template>
     <main-form :ref="formRef" :form-ref="formRef" :loading="loading" :model="model" :rules="rules"
-               :label-width="labelWidth"
+               :label-width="labelWidth" :disabled="locked"
     >
         <template v-slot:header>
             <el-page-header :title="$t('Back')" @back="goBack">
@@ -9,9 +9,20 @@
                 </template>
             </el-page-header>
             <div v-if="model.id" class="card-header-actions">
-                <el-button :disabled="deleteButtonDisabled" @click="remove" size="small" type="danger">
-                    <i class="far fa-trash-alt" /> {{ $t("Delete user") }}
-                </el-button>
+                <template v-if="currentUserIsAdmin || currentUserId === model.id">
+                    <router-link v-if="locked" :to="{ name: 'EditUser', props: { modelId: model.id } }"
+                                 tag="button" class="el-button el-button--warning el-button--small"
+                    >
+                        {{ $t("Edit user") }}
+                    </router-link>
+                    <template v-else>
+                        <el-button v-if="currentUserIsAdmin" :disabled="deleteButtonDisabled" @click="remove"
+                                   size="small" type="danger"
+                        >
+                            <i class="fas fa-user-times" /> {{ $t("Delete user") }}
+                        </el-button>
+                    </template>
+                </template>
             </div>
         </template>
         <template v-slot:body>
@@ -154,6 +165,7 @@
 
         computed: {
             ...mapGetters("auth", {
+                currentUserId: "user_id",
                 currentUserIsAdmin: "isAdministrator",
             }),
 

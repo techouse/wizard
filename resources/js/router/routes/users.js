@@ -24,6 +24,20 @@ export default {
         {
             path: ":modelId(\\d+)/",
             component: () => import(/* webpackChunkName: "users-edit" */ "../../pages/Users/edit"),
+            props: (route) => ({
+                modelId: route.params.modelId,
+                locked: true,
+            }),
+            name: "ViewUser",
+            meta: {
+                requiresAuth: true,
+                requiresMyselfOrAdmin: true,
+                breadcrumb: "View",
+            },
+        },
+        {
+            path: ":modelId(\\d+)/edit/",
+            component: () => import(/* webpackChunkName: "users-edit" */ "../../pages/Users/edit"),
             props: true,
             name: "EditUser",
             meta: {

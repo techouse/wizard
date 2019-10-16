@@ -65,7 +65,7 @@
   "Delete selection": "Izbriši izbor",
   "Clear selection": "Počisti izbor",
   "Created at": "Ustvarjen",
-  "Type to search name or email address": "Išči po imenu ali e-poštnem naslovu",
+  "Type to search": "Iskanje",
   "Edit user": "Uredi uporabnika",
   "Users": "Uporabniki",
   "plural_suffix": "i",
@@ -75,5 +75,6 @@
   "Edit": "Urejanje",
   "Logout": "Odjava",
   "Edit users": "Urejanje uporabnikov",
-  "List": "Seznam"
+  "List": "Seznam",
+  "View user": "Poglej uporabnika"
 }

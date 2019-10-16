@@ -6,7 +6,8 @@
             </div>
         </template>
         <el-form :id="id" :ref="formRef" v-loading="loading" :model="model" :rules="rules"
-                 :label-width="labelWidth" :label-position="labelPosition" @submit.native.prevent
+                 :label-width="labelWidth" :label-position="labelPosition" :disabled="disabled"
+                 @submit.native.prevent
         >
             <div class="mt-4">
                 <slot name="body" />
@@ -50,6 +51,10 @@
             labelPosition: {
                 type: String,
                 default: "right",
+            },
+            disabled: {
+                type: Boolean,
+                default: false,
             },
         },
 

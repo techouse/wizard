@@ -18,4 +18,11 @@
   .el-loading-spinner {
     @apply flex items-center justify-center;
   }
+
+  .el-input.is-disabled {
+    .el-input__inner {
+      color: #606266;
+      cursor: default;
+    }
+  }
 }

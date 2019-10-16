@@ -66,7 +66,7 @@
   "Delete selection": "Delete selection",
   "Clear selection": "Clear selection",
   "Created at": "Created at",
-  "Type to search name or email address": "Type to search name or email address",
+  "Type to search": "Type to search",
   "Edit user": "Edit user",
   "Users": "Users",
   "plural_suffix": "s",
@@ -76,5 +76,6 @@
   "Edit": "Edit",
   "Logout": "Logout",
   "Edit users": "Edit users",
-  "List": "List"
+  "List": "List",
+  "View user": "View user"
 }

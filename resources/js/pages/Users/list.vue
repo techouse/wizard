@@ -51,22 +51,33 @@
                 <el-table-column align="right">
                     <template slot="header" slot-scope="scope">
                         <el-input v-model="params.search"
-                                  :placeholder="$t('Type to search name or email address')"
+                                  :placeholder="$t('Type to search')"
                                   @change="searchData"
                                   size="mini"
                                   clearable
                         />
                     </template>
                     <template slot-scope="scope">
-                        <el-tooltip :content="$t('Edit user')" class="item" effect="dark" placement="top-start">
+                        <el-tooltip :content="$t('View user')" class="item" effect="dark" placement="top-start">
+                            <router-link :to="{name: 'ViewUser', params: {modelId: scope.row.id}}"
+                                         class="el-button el-button--primary el-button--mini"
+                            >
+                                <i class="fas fa-eye" />
+                            </router-link>
+                        </el-tooltip>
+                        <el-tooltip v-if="currentUserIsAdmin || currentUser.id === scope.row.id"
+                                    :content="$t('Edit user')" class="item" effect="dark" placement="top-start"
+                        >
                             <router-link :to="{name: 'EditUser', params: {modelId: scope.row.id}}"
-                                         class="el-button el-button--secondary el-button--small"
+                                         class="el-button el-button--warning el-button--mini"
                             >
                                 <i class="fas fa-user-edit" />
                             </router-link>
                         </el-tooltip>
-                        <el-tooltip :content="$t('Delete user')" class="item" effect="dark" placement="top-start">
-                            <el-button :disabled="scope.row.id === user_id" @click="remove(scope.row)" size="small"
+                        <el-tooltip v-if="currentUserIsAdmin" :content="$t('Delete user')" class="item"
+                                    effect="dark" placement="top-start"
+                        >
+                            <el-button :disabled="scope.row.id === currentUserId" @click="remove(scope.row)" size="mini"
                                        type="danger"
                             >
                                 <i class="fas fa-user-times" />
@@ -107,7 +118,10 @@
         },
 
         computed: {
-            ...mapGetters("auth", ["user_id"]),
+            ...mapGetters("auth", {
+                currentUserId: "user_id",
+                currentUserIsAdmin: "isAdministrator",
+            }),
 
             ...mapGetters("user", ["currentUser"]),
         },

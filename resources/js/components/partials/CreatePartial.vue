@@ -9,6 +9,13 @@
 
         mixins: [AlertMixin],
 
+        props: {
+            locked: {
+                type: Boolean,
+                default: false,
+            },
+        },
+
         data() {
             return {
                 labelWidth: "140px",
