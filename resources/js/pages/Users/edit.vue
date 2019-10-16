@@ -86,7 +86,11 @@
         },
 
         computed: {
-            ...mapGetters("user", ["currentUser", "currentUserIsAdmin"]),
+            ...mapGetters("auth", {
+                currentUserIsAdmin: "isAdministrator",
+            }),
+
+            ...mapGetters("user", ["currentUser"]),
         },
 
         created() {

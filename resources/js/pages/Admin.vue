@@ -82,7 +82,11 @@
         },
 
         computed: {
-            ...mapGetters("user", ["currentUser", "currentUserIsAdmin"]),
+            ...mapGetters("auth", {
+                currentUserIsAdmin: "isAdministrator",
+            }),
+
+            ...mapGetters("user", ["currentUser"]),
 
             showCollapsedMenu() {
                 return this.clientWidth !== null && this.clientWidth < 1024

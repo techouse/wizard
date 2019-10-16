@@ -27,6 +27,8 @@ const getters = {
     remember: (state) => state.remember,
 
     isAuthenticated: (state) => state.access_token !== null && +new Date() < state.expires,
+
+    isAdministrator: (state) => state.user_role && state.user_role === "administrator",
 }
 
 const mutations = {

@@ -149,7 +149,11 @@
         },
 
         computed: {
-            ...mapGetters("user", ["currentUser", "currentUserIsAdmin"]),
+            ...mapGetters("auth", {
+                currentUserIsAdmin: "isAdministrator",
+            }),
+
+            ...mapGetters("user", ["currentUser"]),
 
             deleteButtonDisabled() {
                 if (this.currentUser && "id" in this.currentUser) {
