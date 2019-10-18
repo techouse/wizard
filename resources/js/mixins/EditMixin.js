@@ -19,6 +19,7 @@ export default {
                     .then(({ data }) => {
                         const model = new Model(data.data)
                         this.$set(this, "model", model)
+                        this.$set(this, "modelOriginal", new Model(data.data))
                         this.$set(this, "loading", false)
 
                         resolve(model)
@@ -33,6 +34,11 @@ export default {
                         reject(error)
                     })
             })
+        },
+
+        goBack() {
+            this.restoreModel()
+            this.$router.back()
         },
 
         _beforeRouteUpdate(to, from, next, callback, Model) {

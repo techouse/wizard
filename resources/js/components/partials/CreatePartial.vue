@@ -21,6 +21,7 @@
                 labelWidth: "140px",
                 formRef: "create-form",
                 model: {},
+                modelOriginal: {},
                 rules: {},
                 loading: false,
             }
@@ -39,8 +40,12 @@
             remove() {
             },
 
+            restoreModel() {
+                this.$set(this, "model", this.modelOriginal)
+            },
+
             goBack() {
-                this.$router.go(-1)
+                this.$router.back()
             },
         },
     }
