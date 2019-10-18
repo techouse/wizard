@@ -133,9 +133,5 @@
                     })
             },
         },
-
-        beforeRouteUpdate(to, from, next) {
-            this._beforeRouteUpdate(to, from, next, this.getUser, User)
-        },
     }
 </script>
