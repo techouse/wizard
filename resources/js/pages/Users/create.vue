@@ -38,7 +38,7 @@
                         <el-input v-model="model.password_confirmation" :required="!model.id" type="password" />
                     </el-form-item>
                     <el-form-item v-if="currentUserIsAdmin" :label="$t('Role')" prop="role">
-                        <el-select v-model="model.role" :placeholder="$t('User role')" required>
+                        <el-select v-model="model.role" :placeholder="$t('User role')" class="block" required>
                             <el-option v-for="role in roles"
                                        :key="role.id"
                                        :label="role.name"
@@ -55,9 +55,14 @@
             </div>
         </template>
         <template v-slot:footer>
-            <el-button @click="submit" type="success" native-type="submit">
-                {{ model.id ? $t("Update") : $t("Create") }}
-            </el-button>
+            <template v-if="!locked">
+                <el-button @click="submit" type="success" native-type="submit">
+                    {{ model.id ? $t("Update") : $t("Create") }}
+                </el-button>
+                <el-button @click="goBack" type="danger">
+                    {{ $t("Cancel") }}
+                </el-button>
+            </template>
         </template>
     </main-form>
 </template>
