@@ -1,5 +1,5 @@
 <script>
-    import { isEmpty } from "lodash"
+    import { isEmpty } from "lodash-es"
     import MainContent from "../MainContent"
     import AlertMixin  from "../../mixins/AlertMixin"
 

@@ -1,4 +1,4 @@
-import camelCase from "lodash/camelCase"
+import { camelCase } from "lodash-es"
 
 const requireModule = require.context(".", false, /\.js$/) // extract js files inside modules folder
 const modules = {}
