@@ -66,4 +66,9 @@ router.beforeEach((to, from, next) => {
     }
 })
 
+router.afterEach((to, from) => {
+    store.dispatch("history/setCurrent", to)
+    store.dispatch("history/setPrevious", from)
+})
+
 export default router
