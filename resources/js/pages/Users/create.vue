@@ -31,12 +31,14 @@
                     <el-form-item :label="$t('E-mail')" prop="email">
                         <el-input v-model="model.email" type="email" required />
                     </el-form-item>
-                    <el-form-item :label="$t('Password')" prop="password">
-                        <el-input v-model="model.password" :required="!model.id" type="password" />
-                    </el-form-item>
-                    <el-form-item :label="$t('Repeat password')" prop="password_confirmation">
-                        <el-input v-model="model.password_confirmation" :required="!model.id" type="password" />
-                    </el-form-item>
+                    <template v-if="!locked">
+                        <el-form-item :label="$t('Password')" prop="password">
+                            <el-input v-model="model.password" :required="!model.id" type="password" />
+                        </el-form-item>
+                        <el-form-item :label="$t('Repeat password')" prop="password_confirmation">
+                            <el-input v-model="model.password_confirmation" :required="!model.id" type="password" />
+                        </el-form-item>
+                    </template>
                     <el-form-item v-if="currentUserIsAdmin" :label="$t('Role')" prop="role">
                         <el-select v-model="model.role" :placeholder="$t('User role')" class="block" required>
                             <el-option v-for="role in roles"
