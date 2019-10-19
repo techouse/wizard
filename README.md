@@ -8,7 +8,7 @@
     <img width="150" height="150" src="resources/images/logo.svg">
 </div>
 
-# Wizard
+# :rabbit: Wizard
 
 ## Setup
 
@@ -51,7 +51,7 @@ API_CLIENT_SECRET=
 npm run dev
 ```
 
-## CRUD Wizard
+## :crystal_ball: CRUD Wizard
 
 In order to speed up your workflow I wrote a small CRUD wizard.
 
