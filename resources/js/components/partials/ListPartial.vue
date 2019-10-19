@@ -52,6 +52,17 @@
             }
         },
 
+        computed: {
+            url() {
+                return `${window.location.protocol}//${window.location.host}${window.location.pathname}?${
+                    Object.keys(this.params)
+                          .filter((k) => !!this.params[k])
+                          .map((k) => `${k}=${encodeURIComponent(this.params[k])}`)
+                          .join("&")
+                }`
+            },
+        },
+
         created() {
             this.$set(this, "loading", true)
             this.updateData()
@@ -70,13 +81,7 @@
             },
 
             _getData(callback, Model) {
-                const newUrl = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${
-                    Object.keys(this.params)
-                          .filter((k) => !!this.params[k])
-                          .map((k) => `${k}=${encodeURIComponent(this.params[k])}`)
-                          .join("&")
-                }`
-                window.history.pushState({ path: newUrl }, "", newUrl)
+                window.history.replaceState({ path: this.url }, "", this.url)
 
                 return new Promise((resolve, reject) => {
                     callback({ params: this.params })
