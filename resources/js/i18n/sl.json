@@ -23,6 +23,7 @@
   "Invalid model provided!": "Invalid model provided!",
   "Length should be between {min} and {max} characters": "Dolžina mora biti med {min} in {max} znaki",
   "List": "Seznam",
+  "localeDateString": "sl-SI",
   "Login": "Prijava",
   "Logout": "Odjava",
   "Minimal length is {min} characters": "Dolžina mora biti vsaj {min} znakov",

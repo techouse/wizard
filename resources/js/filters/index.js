@@ -1,10 +1,11 @@
 import Vue        from "vue"
 import { format } from "date-fns"
+import i18n       from "../i18n"
 
 Vue.filter("formatDate", (value, formatString = "YYYY-MM-DD HH:mm:ss") => format(new Date(value), formatString))
 
 Vue.filter("localeDateString", (value) => new Date(value)
-    .toLocaleDateString(navigator.language, {
+    .toLocaleDateString(i18n.t("localeDateString") || navigator.language, {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",

@@ -23,6 +23,7 @@
   "Invalid model provided!": "Invalid model provided!",
   "Length should be between {min} and {max} characters": "Length should be between {min} and {max} characters",
   "List": "List",
+  "localeDateString": "en-GB",
   "Login": "Login",
   "Logout": "Logout",
   "Minimal length is {min} characters": "Minimal length is {min} characters",
