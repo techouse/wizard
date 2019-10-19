@@ -8,9 +8,9 @@
     <img width="150" height="150" src="resources/images/logo.svg">
 </div>
 
-# :rabbit: Wizard
+# :tophat: Wizard :rabbit:
 
-## Setup
+## :construction_worker: Setup
 
 ```bash
 composer install
@@ -21,7 +21,7 @@ npm ci
 
 **DO NOT YET BUILD THE JAVASCRIPT BUNDLES!**
 
-## Passport Configuration
+## :passport_control: Passport Configuration
 
 In order to get Laravel Passport running you need to do a few steps:
 
