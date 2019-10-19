@@ -17,7 +17,8 @@ class AddRoleToUsersTable extends Migration
             $table->string('role')
                   ->default('user')
                   ->index()
-                  ->after('password');
+                  ->after('password')
+                  ->comment('Role of User');
         });
     }
 
