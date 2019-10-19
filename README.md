@@ -62,6 +62,27 @@ php artisan make:migration create_animals_table --create=animals
 php artisan wizard:crud Animal
 ```
 
-The wizard will create a `Model`, `Controller`, `Resource`, and `Policy`.
-The only thing you have to do then is register the policy in `app/Providers/AuthServiceProvider.php`.
-Also take a look at `routes/api.php` and move the generated ApiResource line to the correct place.
+The wizard will then create these PHP files:
+
+- `app/Animal.php`
+- `app/Http/Resources/AnimalResource.php`
+- `app/Http/Resources/AnimalsResource.php`
+- `app/Policies/AnimalPolicy.php`
+- `app/Http/Controllers/Api/AnimalController.php`
+
+You will you have to register the policy in `app/Providers/AuthServiceProvider.php` and register
+the `ApiResource` routes inside `routes/api.php`.
+
+In addition the wizard will also create JavaScript resources:
+
+ - `resources/js/models/Animal.js`
+ - `resources/js/store/modules/animal.js`
+ - `resources/js/router/routes/animals.js`
+ - `resources/js/pages/Animals/create.vue`
+ - `resources/js/pages/Animals/edit.vue`
+ - `resources/js/pages/Animals/index.vue`
+ - `resources/js/pages/Animals/list.vue`
+
+You will then have to register the Vue router routes inside `/resources/js/router/index.js`.
+
+You might also want to make a menu entry in `resources/js/pages/Admin.vue`.

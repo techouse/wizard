@@ -58,7 +58,10 @@ class CrudWizard extends Command
         $this->jsPageIndex($name);
         $this->jsPageList($name);
 
-        $this->warn('Do not forget to register the routes in ' . app_path('routes/api.php') . ' and ' . resource_path('js/router/index.js'). '. You might also want to make a menu entry in ' . resource_path('js/pages/Admin.vue') . '.');
+        $this->warn('Register the policy in ' . app_path('Providers/AuthServiceProvider.php'));
+        $this->warn('Register the ApiResource routes in ' . base_path('routes/api.php'));
+        $this->warn('Register the Vue Router routes in ' . resource_path('js/router/index.js'));
+        $this->warn('You might also want to make a menu entry in ' . resource_path('js/pages/Admin.vue'));
     }
 
     protected function getStub(string $type): string
