@@ -1,0 +1,104 @@
+<template>
+    <main-form :ref="formRef" :form-ref="formRef" :loading="loading" :model="model" :rules="rules"
+               :label-width="labelWidth" :disabled="locked"
+    >
+        <template v-slot:header>
+            <el-page-header :title="$t('Back')" @back="goBack">
+                <template slot="content">
+                    <i class="fas fa-magic" /> {{ title }}
+                </template>
+            </el-page-header>
+            <div v-if="model.id" class="card-header-actions">
+                <router-link v-if="locked" :to="{ name: 'Edit##modelName##', props: { modelId: model.id } }"
+                             tag="button" class="el-button el-button--warning el-button--small"
+                >
+                    {{ $t("Edit ##modelNameLowerWithSpaces##") }}
+                </router-link>
+                <el-button v-else @click="remove" size="small" type="danger">
+                    <i class="fal fa-trash-alt" /> {{ $t("Delete ##modelNameLowerWithSpaces##") }}
+                </el-button>
+            </div>
+        </template>
+        <template v-slot:body>
+            <div class="flex flex-col flex-col-reverse lg:flex-row">
+                <div class="lg:w-1/2">
+                    <el-form-item :label="$t('Name')" prop="name">
+                        <el-input v-model="model.name" type="text" required />
+                    </el-form-item>
+                </div>
+            </div>
+        </template>
+        <template v-slot:footer>
+            <template v-if="!locked">
+                <el-button @click="submit" type="success" native-type="submit">
+                    {{ model.id ? $t("Update") : $t("Create") }}
+                </el-button>
+                <el-button @click="goBack" type="danger">
+                    {{ $t("Cancel") }}
+                </el-button>
+            </template>
+        </template>
+    </main-form>
+</template>
+
+<script>
+    import { mapActions } from "vuex"
+    import CreatePartial  from "../../components/partials/CreatePartial"
+    import ##modelName##  from "../../models/##modelName##"
+
+    export default {
+        name: "Create##modelName##",
+
+        extends: CreatePartial,
+
+        data() {
+            return {
+                formRef: "create-##modelNameKebabCase##-form",
+                model: new ##modelName##(),
+                rules: {
+                    // TODO add optional rules here
+                },
+            }
+        },
+
+        computed: {
+            title() {
+                return this.$t("Create new ##modelNameLowerWithSpaces##")
+            },
+        },
+
+        watch: {
+            "model.name": {
+                handler(current, previous) {
+                    if (current && current !== previous) {
+                        this.$set(this.model, "slug", slugify(current, "-"))
+                    }
+                },
+            },
+        },
+
+        methods: {
+            ...mapActions("##modelNameCamelCase##", ["create##modelName##"]),
+
+            submit() {
+                this.$refs[this.formRef].validate((valid) => {
+                    if (valid) {
+                        this.create##modelName##(this.model)
+                            .then(({ data }) => {
+                                this.success(this.$t("##modelName## successfully created"))
+                                this.$router.push({
+                                    name: "Edit##modelName##",
+                                    params: { modelId: data.data.id },
+                                })
+                            })
+                            .catch(() => {
+                                this.error(this.$t("There was an error creating the ##modelNameLowerWithSpaces##: {message}", { message: this.alert.message }))
+                            })
+                    } else {
+                        this.error(this.$t("The form data is invalid!"))
+                    }
+                })
+            },
+        },
+    }
+</script>

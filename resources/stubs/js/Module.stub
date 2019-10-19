@@ -1,0 +1,29 @@
+import { create, destroy, get, update } from "../../services"
+
+const state = {}
+
+const getters = {}
+
+const mutations = {}
+
+const actions = {
+    get##modelName##: (context, id) => get(context, `/##modelNamePluralKebabCase##/${id}`),
+
+    get##modelNamePluralPascalCase##: (context, params = {}) => get(context, "/##modelNamePluralKebabCase##/", params),
+
+    create##modelName##: (context, model) => create(context, "/##modelNamePluralKebabCase##/", model),
+
+    update##modelName##: (context, model) => update(context, `/##modelNamePluralKebabCase##/${model.id}`, model),
+
+    delete##modelName##: (context, id) => destroy(context, `/##modelNamePluralKebabCase##/${id}`),
+
+    delete##modelNamePluralPascalCase##: (context, ids) => destroy(context, "/##modelNamePluralKebabCase##/", { ids }),
+}
+
+export default {
+    namespaced: true,
+    state,
+    getters,
+    mutations,
+    actions,
+}

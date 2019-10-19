@@ -1,0 +1,26 @@
+export default class ##modelName## {
+    constructor(values = {}) {
+        this.id = null
+
+        // TODO additional data
+
+        this.created_at = null
+        this.updated_at = null
+
+        Object.assign(this, values)
+
+        if (this.created_at) {
+            this.created_at = new Date(this.created_at)
+        }
+
+        if (this.updated_at) {
+            this.updated_at = new Date(this.updated_at)
+        }
+    }
+
+    mappedForSubmission() {
+        return {
+            // TODO data you want sent
+        }
+    }
+}

@@ -1,0 +1,57 @@
+export default {
+    path: "/##modelNamePluralKebabCase##/",
+    component: () => import(/* webpackChunkName: "tags" */ "../../pages/##modelNamePluralPascalCase##"),
+    meta: {
+        requiresAuth: true,
+        breadcrumb: "##modelNamePluralPascalCase##",
+    },
+    children: [
+        {
+            path: "",
+            component: () => import(/* webpackChunkName: "tags-list" */ "../../pages/##modelNamePluralPascalCase##/list"),
+            name: "##modelNamePluralPascalCase##",
+            props: (route) => ({
+                search: route.query.search,
+                page: Number(route.query.page) || 1,
+                perPage: Number(route.query.per_page) || 12,
+                sort: route.query.sort,
+            }),
+            meta: {
+                requiresAuth: true,
+            },
+        },
+        {
+            path: ":modelId(\\d+)/",
+            component: () => import(/* webpackChunkName: "users-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
+            props: (route) => ({
+                modelId: route.params.modelId,
+                locked: true,
+            }),
+            name: "View##modelName##",
+            meta: {
+                requiresAuth: true,
+                breadcrumb: "View",
+            },
+        },
+        {
+            path: ":modelId(\\d+)/edit",
+            component: () => import(/* webpackChunkName: "tags-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
+            props: true,
+            name: "Edit##modelName##",
+            meta: {
+                requiresAuth: true,
+                breadcrumb: "Edit",
+            },
+        },
+        {
+            path: "new/",
+            component: () => import(/* webpackChunkName: "tags-create" */ "../../pages/##modelNamePluralPascalCase##/create"),
+            name: "Create##modelName##",
+            meta: {
+                requiresAuth: true,
+                requiresAdmin: true,
+                breadcrumb: "Create",
+            },
+        },
+    ],
+}

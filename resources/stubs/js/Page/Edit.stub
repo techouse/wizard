@@ -1,0 +1,67 @@
+<script>
+    import { mapActions } from "vuex"
+    import CreateTag      from "./create"
+    import EditMixin      from "../../mixins/EditMixin"
+    import ##modelName##  from "../../models/##modelName##"
+
+    export default {
+        name: "Edit##modelName##",
+
+        extends: Create##modelName##,
+
+        mixins: [EditMixin],
+
+        data() {
+            return {
+                formRef: "edit-##modelNameKebabCase##-form",
+            }
+        },
+
+        created() {
+            this.$set(this, "loading", true)
+
+            this._getModel(this.get##modelName##, ##modelName##)
+        },
+
+        methods: {
+            ...mapActions("##modelNameCamelCase##", ["get##modelName##", "update##modelName##", "delete##modelName##"]),
+
+            submit() {
+                this.$refs[this.formRef].validate((valid) => {
+                    if (valid) {
+                        this.update##modelName##(this.model)
+                            .then(() => {
+                                this.success(this.$t("##modelNameCapitalisedWithSpaces## successfully updated"))
+                            })
+                            .catch(() => {
+                                this.error(this.$t("There was an error updating the tag: {message}", { message: this.alert.message }))
+                            })
+                    } else {
+                        this.error(this.$t("The form data is invalid!"))
+                    }
+                })
+            },
+
+            remove() {
+                this.$confirm(this.$t("Are you sure you want to delete {label}?", { label: this.model.name }), this.$t("Warning"), {
+                        confirmButtonText: this.$t("Yes"),
+                        cancelButtonText: this.$t("No"),
+                        type: "warning",
+                    })
+                    .then(() => {
+                        this.delete##modelName##(this.model.id)
+                            .then(() => {
+                                this.$router.push({ name: "##modelNamePluralPascalCase##" })
+                                this.success(this.$t("##modelNameCapitalisedWithSpaces## successfully deleted"))
+                            })
+                            .catch(() => {
+                                this.error(this.$t("There was an error deleting the tag: {message}", { message: this.alert.message }))
+                            })
+                    })
+                    .catch(() => {
+                        this.info(this.$t("##modelNameCapitalisedWithSpaces## not deleted"))
+                    })
+            },
+        },
+    }
+</script>
