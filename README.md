@@ -4,6 +4,8 @@
     <img width="150" height="150" src="resources/images/vuejs.svg">
     <strong style="font-size: 90px">+</strong>
     <img width="150" height="150" src="resources/images/elementui.svg">
+    <strong style="font-size: 90px">+</strong>
+    <img width="150" height="150" src="resources/images/tailwind.svg">
     <strong style="font-size: 90px">=</strong>
     <img width="150" height="150" src="resources/images/logo.svg">
 </div>
