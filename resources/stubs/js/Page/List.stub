@@ -21,7 +21,7 @@
                     </el-dropdown-menu>
                 </el-dropdown>
                 <router-link :to="{name: 'Create##modelName##'}" class="el-button el-button--success el-button--small">
-                    <i class="fal fa-layer-plus" /> {{ $t("Create new ##modelNameLowerWithSpaces##") }}
+                    <i class="fal fa-plus-circle" /> {{ $t("Create new ##modelNameLowerWithSpaces##") }}
                 </router-link>
             </div>
         </template>
@@ -58,14 +58,14 @@
                         </el-tooltip>
                         <el-tooltip :content="$t('Edit ##modelNameLowerWithSpaces##')" class="item" effect="dark" placement="top-start">
                             <router-link :to="{name: 'Edit##modelName##', params: {modelId: scope.row.id}}"
-                                         class="el-button el-button--warning el-button--small"
+                                         class="el-button el-button--warning el-button--mini"
                             >
                                 <i class="far fa-edit" />
                             </router-link>
                         </el-tooltip>
                         <el-tooltip :content="$t('Delete ##modelNameLowerWithSpaces##')" class="item" effect="dark" placement="top-start">
-                            <el-button @click="remove(scope.row)" size="small" type="danger">
-                                <i class="far fa-layer-minus" />
+                            <el-button @click="remove(scope.row)" size="mini" type="danger">
+                                <i class="far fa-trash-alt" />
                             </el-button>
                         </el-tooltip>
                     </template>
