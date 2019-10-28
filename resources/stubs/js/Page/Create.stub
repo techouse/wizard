@@ -67,16 +67,6 @@
             },
         },
 
-        watch: {
-            "model.name": {
-                handler(current, previous) {
-                    if (current && current !== previous) {
-                        this.$set(this.model, "slug", slugify(current, "-"))
-                    }
-                },
-            },
-        },
-
         methods: {
             ...mapActions("##modelNameCamelCase##", ["create##modelName##"]),
 
