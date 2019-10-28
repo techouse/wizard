@@ -63,7 +63,7 @@ class {{modelName}}Controller extends Controller
             // TODO request validation
         );
 
-        new {{modelName}}Resource({{modelName}}::create($data));
+        return new {{modelName}}Resource({{modelName}}::create($data));
     }
 
     /**
