@@ -104,7 +104,7 @@ class {{modelName}}Controller extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\{{modelName}} $region
+     * @param \App\{{modelName}} ${{modelNameSingularCamelCase}}
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
