@@ -29,17 +29,17 @@
             <el-table :ref="tableRef" v-loading="loading" :data="models" @sort-change="orderBy"
                       @selection-change="handleSelectionChange" class="w-full"
             >
-                <el-table-column type="selection" width="55" />
-                <el-table-column label="#" prop="id" width="60" sortable="custom" />
-                <el-table-column :label="$t('Name')" prop="name" sortable="custom" />
-                <el-table-column :label="$t('Created at')" align="center" width="160" prop="created_at"
+                <el-table-column type="selection" width="55" fixed />
+                <el-table-column label="#" prop="id" width="60" sortable="custom" fixed />
+                <el-table-column :label="$t('Name')" min-width="180" prop="name" sortable="custom" fixed />
+                <el-table-column :label="$t('Created at')" align="center" min-width="160" prop="created_at"
                                  sortable="custom"
                 >
                     <template slot-scope="scope">
                         <time :datetime="scope.row.created_at">{{ scope.row.created_at|localeDateString }}</time>
                     </template>
                 </el-table-column>
-                <el-table-column align="right">
+                <el-table-column align="right" fixed="right" min-width="190">
                     <template slot="header" slot-scope="scope">
                         <el-input v-model="params.search"
                                   :placeholder="$t('Type to search')"
