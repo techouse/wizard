@@ -1,6 +1,6 @@
 export default {
     path: "/##modelNamePluralKebabCase##/",
-    component: () => import(/* webpackChunkName: "tags" */ "../../pages/##modelNamePluralPascalCase##"),
+    component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##" */ "../../pages/##modelNamePluralPascalCase##"),
     meta: {
         requiresAuth: true,
         breadcrumb: "##modelNamePluralPascalCase##",
@@ -8,7 +8,7 @@ export default {
     children: [
         {
             path: "",
-            component: () => import(/* webpackChunkName: "tags-list" */ "../../pages/##modelNamePluralPascalCase##/list"),
+            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-list" */ "../../pages/##modelNamePluralPascalCase##/list"),
             name: "##modelNamePluralPascalCase##",
             props: (route) => ({
                 search: route.query.search,
@@ -22,7 +22,7 @@ export default {
         },
         {
             path: ":modelId(\\d+)/",
-            component: () => import(/* webpackChunkName: "users-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
+            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
             props: (route) => ({
                 modelId: route.params.modelId,
                 locked: true,
@@ -35,7 +35,7 @@ export default {
         },
         {
             path: ":modelId(\\d+)/edit",
-            component: () => import(/* webpackChunkName: "tags-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
+            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
             props: true,
             name: "Edit##modelName##",
             meta: {
@@ -45,7 +45,7 @@ export default {
         },
         {
             path: "new/",
-            component: () => import(/* webpackChunkName: "tags-create" */ "../../pages/##modelNamePluralPascalCase##/create"),
+            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-create" */ "../../pages/##modelNamePluralPascalCase##/create"),
             name: "Create##modelName##",
             meta: {
                 requiresAuth: true,
