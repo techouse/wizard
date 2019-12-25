@@ -88,8 +88,8 @@
 
 <script>
     import { mapActions } from "vuex"
-    import ListPartial    from "../../components/partials/ListPartial"
-    import ##modelName##  from "../../models/##modelName##"
+    import ListPartial    from "@/components/partials/ListPartial"
+    import ##modelName##  from "@/models/##modelName##"
 
     export default {
         name: "List##modelNamePluralPascalCase##",

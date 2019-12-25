@@ -43,8 +43,8 @@
 
 <script>
     import { mapActions } from "vuex"
-    import CreatePartial  from "../../components/partials/CreatePartial"
-    import ##modelName##  from "../../models/##modelName##"
+    import CreatePartial  from "@/components/partials/CreatePartial"
+    import ##modelName##  from "@/models/##modelName##"
 
     export default {
         name: "Create##modelName##",

@@ -1,8 +1,8 @@
 import { addSeconds, differenceInMilliseconds, differenceInMinutes, subMinutes } from "date-fns"
 import jwtDecode                                                                 from "jwt-decode"
-import router                                                                    from "../../router"
-import api                                                                       from "../../services/api"
-import i18n                                                                      from "../../i18n"
+import router                                                                    from "@/router"
+import api                                                                       from "@/services/api"
+import i18n                                                                      from "@/i18n"
 
 const state = {
     user_id: null,

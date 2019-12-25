@@ -1,6 +1,6 @@
 <script>
-    import MainForm   from "../MainForm"
-    import AlertMixin from "../../mixins/AlertMixin"
+    import MainForm   from "@/components/MainForm"
+    import AlertMixin from "@/mixins/AlertMixin"
 
     export default {
         name: "CreatePartial",

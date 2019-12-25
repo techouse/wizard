@@ -1,4 +1,4 @@
-import { create, destroy, get, update } from "../../services"
+import { create, destroy, get, update } from "@/services"
 
 const state = {}
 

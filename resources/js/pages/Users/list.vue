@@ -103,8 +103,8 @@
 
 <script>
     import { mapActions, mapGetters } from "vuex"
-    import ListPartial                from "../../components/partials/ListPartial"
-    import User                       from "../../models/User"
+    import ListPartial                from "@/components/partials/ListPartial"
+    import User                       from "@/models/User"
 
     export default {
         name: "ListUsers",

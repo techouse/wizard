@@ -1,20 +1,25 @@
 import Vue        from "vue"
 import { format } from "date-fns"
-import i18n       from "../i18n"
+import i18n       from "@/i18n"
 
 Vue.filter("formatDate", (value, formatString = "YYYY-MM-DD HH:mm:ss") => format(new Date(value), formatString))
 
-Vue.filter("localeDateString", (value) => new Date(value)
-    .toLocaleDateString(i18n.t("localeDateString") || navigator.language, {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-    })
-    .replace(/,/g, ""))
+Vue.filter("localeDateString", (value) => {
+    if (value) {
+        return new Date(value)
+            .toLocaleDateString(i18n.t("localeDateString") || navigator.language, {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: false,
+            })
+            .replace(/,/g, "")
+    }
+    return null
+})
 
 Vue.filter("truncate", (text = "", length = 30, clamp = "...") => {
     if (text.length <= length) {
@@ -25,7 +30,7 @@ Vue.filter("truncate", (text = "", length = 30, clamp = "...") => {
     let last = tcText.length - 1
 
     while (last > 0 && tcText[last] !== " " && tcText[last] !== clamp[0]) {
-        --last
+        last -= 1
     }
 
     last = last || length - clamp.length

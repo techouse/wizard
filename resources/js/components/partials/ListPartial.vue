@@ -1,7 +1,7 @@
 <script>
     import { isEmpty } from "lodash-es"
-    import MainContent from "../MainContent"
-    import AlertMixin  from "../../mixins/AlertMixin"
+    import MainContent from "@/components/MainContent"
+    import AlertMixin  from "@/mixins/AlertMixin"
 
     export default {
         name: "ListPartial",

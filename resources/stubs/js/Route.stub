@@ -1,57 +1,11 @@
-export default {
-    path: "/##modelNamePluralKebabCase##/",
-    component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##" */ "../../pages/##modelNamePluralPascalCase##"),
-    meta: {
-        requiresAuth: true,
-        breadcrumb: "##modelNamePluralPascalCase##",
+import makeCrudRoutes from "@/utils/makeCrudRoutes"
+
+export default makeCrudRoutes({
+    name: "##modelNamePluralPascalCase##",
+    components: {
+        index: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##" */ "@/pages/##modelNamePluralPascalCase##"),
+        list: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-list" */ "@/pages/##modelNamePluralPascalCase##/list"),
+        edit: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-edit" */ "@/pages/##modelNamePluralPascalCase##/edit"),
+        create: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-create" */ "@/pages/##modelNamePluralPascalCase##/create"),
     },
-    children: [
-        {
-            path: "",
-            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-list" */ "../../pages/##modelNamePluralPascalCase##/list"),
-            name: "##modelNamePluralPascalCase##",
-            props: (route) => ({
-                search: route.query.search,
-                page: Number(route.query.page) || 1,
-                perPage: Number(route.query.per_page) || 12,
-                sort: route.query.sort,
-            }),
-            meta: {
-                requiresAuth: true,
-            },
-        },
-        {
-            path: ":modelId(\\d+)/",
-            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
-            props: (route) => ({
-                modelId: route.params.modelId,
-                locked: true,
-            }),
-            name: "View##modelName##",
-            meta: {
-                requiresAuth: true,
-                breadcrumb: "View",
-            },
-        },
-        {
-            path: ":modelId(\\d+)/edit",
-            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-edit" */ "../../pages/##modelNamePluralPascalCase##/edit"),
-            props: true,
-            name: "Edit##modelName##",
-            meta: {
-                requiresAuth: true,
-                breadcrumb: "Edit",
-            },
-        },
-        {
-            path: "new/",
-            component: () => import(/* webpackChunkName: "##modelNamePluralKebabCase##-create" */ "../../pages/##modelNamePluralPascalCase##/create"),
-            name: "Create##modelName##",
-            meta: {
-                requiresAuth: true,
-                requiresAdmin: true,
-                breadcrumb: "Create",
-            },
-        },
-    ],
-}
+})

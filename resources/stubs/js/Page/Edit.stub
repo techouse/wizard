@@ -1,8 +1,8 @@
 <script>
     import { mapActions }      from "vuex"
     import Create##modelName## from "./create"
-    import EditMixin           from "../../mixins/EditMixin"
-    import ##modelName##       from "../../models/##modelName##"
+    import EditMixin           from "@/mixins/EditMixin"
+    import ##modelName##       from "@/models/##modelName##"
 
     export default {
         name: "Edit##modelName##",

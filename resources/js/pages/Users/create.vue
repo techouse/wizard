@@ -71,8 +71,8 @@
 
 <script>
     import { mapActions, mapGetters } from "vuex"
-    import CreatePartial              from "../../components/partials/CreatePartial"
-    import User                       from "../../models/User"
+    import CreatePartial              from "@/components/partials/CreatePartial"
+    import User                       from "@/models/User"
 
     export default {
         name: "CreateUser",

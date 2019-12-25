@@ -7,13 +7,15 @@ module.exports = {
     extends: [
         "airbnb-base",
         "eslint:recommended",
+        "plugin:import/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
         "plugin:vue/recommended",
         "plugin:vue-i18n/recommended",
     ],
     globals: {
         "process": true,
-        "require": true,
-        "$t": true,
+        "require": true
     },
     env: {
         browser: true,
@@ -24,7 +26,14 @@ module.exports = {
         "import/resolver": {
             node: {
                 extensions: [".mjs", ".js", ".json", ".vue"]
-            }
+            },
+            alias: {
+                map: [
+                    ["~", "./resources/sass/"],
+                    ["@", "./resources/js/"]
+                ],
+                extensions: [".ts", ".js", ".jsx", ".json", ".vue"]
+            },
         },
         "import/extensions": [
             ".js",
@@ -71,7 +80,18 @@ module.exports = {
             vue: "never"
         }],
         "no-new": "off",
-        "no-underscore-dangle": ["error", { "allow": ["_remove", "_bulkRemove", "_getData", "_beforeRouteUpdate", "_getModel"] }],
+        "no-underscore-dangle": ["error", {
+            "allow": [
+                "_remove",
+                "_bulkRemove",
+                "_getData",
+                "_beforeRouteUpdate",
+                "_getModel",
+                "_submit",
+                "_remove",
+                "_multiplier"
+            ]
+        }],
         "vue-i18n/no-dynamic-keys": "error",
         "vue-i18n/no-unused-keys": ["error", {
             extensions: [".js", ".vue"]

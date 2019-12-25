@@ -34,7 +34,7 @@
 
 <script>
     import { mapActions, mapGetters } from "vuex"
-    import User                       from "../../models/User"
+    import User                       from "@/models/User"
 
     export default {
         name: "Login",

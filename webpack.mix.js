@@ -8,6 +8,7 @@ const webpack = require("webpack")
 const env = process.env.NODE_ENV
 const npm_config_argv = JSON.parse(process.env.npm_config_argv)
 const isWatch = npm_config_argv.remain.some(el => el.startsWith("--watch"))
+const webpackConfig = require("./webpack.config")
 
 require("laravel-mix-purgecss")
 
@@ -25,6 +26,7 @@ mix.js("resources/js/index.js", "public/js")
    .copy("node_modules/element-ui/lib/theme-chalk/fonts", "public/fonts")
 
    .webpackConfig({
+       ...webpackConfig,
        output: {
            // https://github.com/JeffreyWay/laravel-mix/issues/1889
            chunkFilename: "js/[name].[chunkhash].js",
