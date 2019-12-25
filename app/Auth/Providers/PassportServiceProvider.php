@@ -19,5 +19,4 @@ class PassportServiceProvider extends \Laravel\Passport\PassportServiceProvider
             app('encrypter')->getKey()
         );
     }
-
 }

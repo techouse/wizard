@@ -12,6 +12,26 @@ use League\OAuth2\Server\CryptKey;
 
 class AccessToken extends PassportAccessToken
 {
+    private $privateKey;
+
+    /**
+     * Generate a string representation from the access token
+     */
+    public function __toString()
+    {
+        return (string)$this->convertToJWT($this->privateKey);
+    }
+
+    /**
+     * Set the private key used to encrypt this access token.
+     *
+     * @param \League\OAuth2\Server\CryptKey $privateKey
+     */
+    public function setPrivateKey(CryptKey $privateKey): void
+    {
+        $this->privateKey = $privateKey;
+    }
+
     public function convertToJWT(CryptKey $privateKey)
     {
         $builder = new Builder();
